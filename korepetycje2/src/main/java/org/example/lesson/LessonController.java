@@ -5,21 +5,36 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/lessons")
 public class LessonController {
-    private LessonRepository lessonRepository;
+    private LessonService lessonService;
 
-    public LessonController(LessonRepository lessonRepository){
-        this.lessonRepository=lessonRepository;
+    public LessonController(LessonService lessonService){
+        this.lessonService=lessonService;
     }
     @GetMapping
     public List<Lesson> getAllLessons(){
-        return lessonRepository.findAll();
+        return lessonService.getAll();
     }
 
     @GetMapping("/{id}")
     public Lesson getLessonById(@PathVariable int id){
-        Lesson lesson=lessonRepository.findById(id).orElse(null);
+        Lesson lesson=lessonService.findById(id);
         return lesson;
+    }
+
+    @PostMapping
+    public Lesson addLesson(@RequestBody Lesson lesson){
+        return lessonService.saveLesson(lesson);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteLessonById(@PathVariable int id){
+        lessonService.deleteLessonById(id);
+    }
+
+    @DeleteMapping
+    public void deleteLesson(@RequestBody Lesson lesson){
+        lessonService.deleteLesson(lesson);
     }
 }

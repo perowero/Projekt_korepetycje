@@ -2,6 +2,7 @@ package org.example.student;
 
 import java.util.List;
 
+import org.example.lesson.Lesson;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,5 +27,15 @@ public class StudentController {
     @PostMapping
     public Student addStudent(@RequestBody Student student){
        return studentService.saveStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudentById(@PathVariable int id){
+        studentService.deleteStudentById(id);
+    }
+
+    @DeleteMapping
+    public void deleteStudent(@RequestBody Student student){
+        studentService.deleteStudent(student);
     }
 }
