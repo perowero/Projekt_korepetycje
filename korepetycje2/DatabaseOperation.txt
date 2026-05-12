@@ -1,0 +1,86 @@
+package org.example;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class DatabaseOperation {
+    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("myAppPU");
+    //EntityManager em = emf.createEntityManager();
+
+    public void addStudent(String name, String surname, String address, int schoolclass, boolean online){
+        em.getTransaction().begin();
+        Student student=new Student(name,surname,address,schoolclass,online);
+        em.persist(student);
+        em.getTransaction().commit();
+    }
+
+    public void addTeacher(String name, String surname){
+        em.getTransaction().begin();
+        Teacher teacher=new Teacher(name,surname);
+        em.persist(teacher);
+        em.getTransaction().commit();
+    }
+
+    public void addLesson(LocalDateTime data, double prize){
+        em.getTransaction().begin();
+        Lesson lesson=new Lesson(data,prize);
+        em.persist(lesson);
+        em.getTransaction().commit();
+    }
+
+    public void deleteStudent(int id){
+        em.getTransaction().begin();
+        Student student=em.find(Student.class,id);
+        if(student!=null){
+            em.remove(student);
+            em.getTransaction().commit();
+        }else{
+            em.getTransaction().rollback();
+        }
+    }
+
+    public void deleteTeacher(int id){
+        em.getTransaction().begin();
+        Teacher teacher=em.find(Teacher.class,id);
+        if(teacher!=null){
+            em.remove(teacher);
+            em.getTransaction().commit();
+        }else{
+            em.getTransaction().rollback();
+        }
+    }
+
+    public void deleteLesson(int id){
+        em.getTransaction().begin();
+        Lesson lesson=em.find(Lesson.class,id);
+        if(lesson!=null){
+            em.remove(lesson);
+            em.getTransaction().commit();
+        }else{
+            em.getTransaction().rollback();
+        }
+    }
+
+    public List<Student> returnStudents(){
+        TypedQuery<Student>query=em.createQuery("SELECT * FROM Student",Student.class);
+        List<Student> list=query.getResultList();
+        return list;
+    }
+
+    public List<Teacher> returnTeacher(){
+        TypedQuery<Teacher>query=em.createQuery("SELECT * FROM Teacher",Teacher.class);
+        List<Teacher> list=query.getResultList();
+        return list;
+    }
+
+    public List<Lesson> returnLesson(){
+        TypedQuery<Lesson>query=em.createQuery("SELECT * FROM Lesson",Lesson.class);
+        List<Lesson> list=query.getResultList();
+        return list;
+    }
+}
