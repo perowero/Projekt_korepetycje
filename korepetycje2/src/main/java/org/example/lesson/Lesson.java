@@ -64,4 +64,20 @@ public class Lesson {
     public Teacher getTeacher() {
         return teacher;
     }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public void setPrize(double prize) {
+        this.prize = prize;
+    }
 }

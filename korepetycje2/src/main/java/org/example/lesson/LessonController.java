@@ -2,6 +2,7 @@ package org.example.lesson;
 
 import java.util.List;
 
+import org.example.student.Student;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,7 @@ public class LessonController {
     }
 
     @PostMapping
-    public Lesson addLesson(@RequestBody Lesson lesson){
+    public Lesson addLesson(@RequestBody LessonDTO lesson){
         return lessonService.saveLesson(lesson);
     }
 
