@@ -38,11 +38,11 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-    public Lesson findById(int id){
+    public Lesson findById(long id){
         return lessonRepository.findById(id).orElse(null);
     }
 
-    public void deleteLessonById(int id){
+    public void deleteLessonById(long id){
         lessonRepository.deleteById(id);
     }
 

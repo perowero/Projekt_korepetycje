@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/teachers")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TeacherController {
     private TeacherService teacherService;
 
@@ -19,7 +20,7 @@ public class TeacherController {
     }
 
     @GetMapping("/{id}")
-    public Teacher getTeacherById(@PathVariable int id){
+    public Teacher getTeacherById(@PathVariable long id){
         Teacher teacher=teacherService.findById(id);
         return teacher;
     }
@@ -30,7 +31,7 @@ public class TeacherController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTeacherById(@PathVariable int id){
+    public void deleteTeacherById(@PathVariable long id){
         teacherService.deleteTeacherById(id);
     }
 

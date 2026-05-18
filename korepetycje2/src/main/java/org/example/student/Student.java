@@ -10,7 +10,7 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String name;
     private String surname;
     private String adress;
@@ -19,10 +19,10 @@ public class Student {
     private boolean active;
 
     @OneToMany(mappedBy="student",cascade=CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("student-lessons")
     private List<Lesson> lessons=new ArrayList<>();
 
-    Student(){}
+    public Student(){}
 
     public Student(String name, String surname, String address, int schoolclass, boolean online){
         this.name=name;
@@ -54,7 +54,7 @@ public class Student {
                 '}';
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -84,5 +84,25 @@ public class Student {
 
     public List<Lesson> getLessons() {
         return lessons;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public void setSchoolclass(int schoolclass) {
+        this.schoolclass = schoolclass;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 }

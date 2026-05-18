@@ -19,11 +19,11 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student findById(int id){
+    public Student findById(long id){
         return studentRepository.findById(id).orElse(null);
     }
 
-    public void deleteStudentById(int id){
+    public void deleteStudentById(long id){
         studentRepository.deleteById(id);
     }
 

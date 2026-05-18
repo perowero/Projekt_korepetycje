@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Lesson {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private LocalDateTime data;
     private double prize;
 
@@ -26,15 +26,15 @@ public class Lesson {
 
     @ManyToOne
     @JoinColumn(name="student")
-    @JsonBackReference
+    @JsonBackReference("student-lessons")
     private Student student;
 
     @ManyToOne
     @JoinColumn(name="teacher")
-    @JsonBackReference
+    @JsonBackReference("teacher-lessons")
     private Teacher teacher;
 
-    public int getId(){
+    public long getId(){
         return this.id;
     }
 
@@ -81,3 +81,5 @@ public class Lesson {
         this.prize = prize;
     }
 }
+
+

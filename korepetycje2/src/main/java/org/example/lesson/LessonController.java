@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/lessons")
+@CrossOrigin(origins = "http://localhost:5173")
 public class LessonController {
     private LessonService lessonService;
 
@@ -19,7 +20,7 @@ public class LessonController {
     }
 
     @GetMapping("/{id}")
-    public Lesson getLessonById(@PathVariable int id){
+    public Lesson getLessonById(@PathVariable long id){
         Lesson lesson=lessonService.findById(id);
         return lesson;
     }
@@ -30,7 +31,7 @@ public class LessonController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLessonById(@PathVariable int id){
+    public void deleteLessonById(@PathVariable long id){
         lessonService.deleteLessonById(id);
     }
 

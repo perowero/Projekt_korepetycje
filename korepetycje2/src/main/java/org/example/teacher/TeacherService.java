@@ -24,11 +24,11 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public Teacher findById(int id){
+    public Teacher findById(long id){
         return teacherRepository.findById(id).orElse(null);
     }
 
-    public void deleteTeacherById(int id){
+    public void deleteTeacherById(long id){
         teacherRepository.deleteById(id);
     }
 
