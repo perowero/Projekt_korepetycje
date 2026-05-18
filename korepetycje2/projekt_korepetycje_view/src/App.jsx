@@ -4,11 +4,15 @@ import './App.css'
 import { FormAddStudent } from './components/FormAddStudent.jsx';
 import { FormAddTeacher } from './components/FormAddTeacher.jsx';
 import {FormAddLesson} from './components/FormAddLesson.jsx';
+import {ListStudents} from './components/ListStudents.jsx';
+import {ListTeachers} from './components/ListTeachers.jsx'
 
 function App() {
   const [students,setStudent]=useState([]);
   const [teachers,setTeacher]=useState([]);
   const [lessons,setLesson]=useState([]);
+  const [showStudents,setShowStudents]=useState(false);
+  const [showTeachers,setShowTeachers]=useState(false);
 
   const addStudent=async (data)=>{
     try{
@@ -81,6 +85,14 @@ function App() {
 
       <h1>dodaj lekcje</h1>
       <FormAddLesson onAddLesson={addLesson}/>
+
+      <button onClick={()=>setShowStudents(true)}> lista studentow</button>
+      {showStudents&&<ListStudents/>}
+      {console.log(showStudents)}
+
+      <button onClick={()=>setShowTeachers(true)}> lista nauczycieli</button>
+      {showTeachers&&<ListTeachers/>}
+      {console.log(showTeachers)}
     </>
   );
     
