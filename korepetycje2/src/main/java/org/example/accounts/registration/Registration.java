@@ -1,4 +1,5 @@
 package org.example.accounts.registration;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -8,6 +9,7 @@ public abstract class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Transient
+    @JsonIgnore
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     private String username;
     private String hash_password;
@@ -38,5 +40,25 @@ public abstract class Registration {
 
     public String getRole() {
         return role;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public BCryptPasswordEncoder getEncoder() {
+        return encoder;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getHash_password() {
+        return hash_password;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

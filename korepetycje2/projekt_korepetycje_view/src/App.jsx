@@ -34,6 +34,24 @@ function App() {
   }
 };
 
+const registerStudent=async (data)=>{
+    try{
+      const response=await fetch('http://localhost:8080/api/register/student',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    if(response.ok){
+      alert("zarejestrowano ucznia");
+    }
+  }catch (error){
+    console.error("błąd połączenia z javą",error);
+  }
+};
+
   const addTeacher=async (data)=>{
     try{
       const response=await fetch('http://localhost:8080/api/teachers',{
@@ -53,6 +71,24 @@ function App() {
       console.error('brak połączenia z javą',error);
     }
   };
+
+  const registerTeacher=async (data)=>{
+    try{
+      const response=await fetch('http://localhost:8080/api/register/teacher',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    if(response.ok){
+      alert("zarejestrowano nauczyciela");
+    }
+  }catch (error){
+    console.error("błąd połączenia z javą",error);
+  }
+};
 
   const addLesson=async (data)=>{
     try{
@@ -78,10 +114,10 @@ function App() {
   return (
     <>
       <h1>Dodaj ucznia</h1>
-      <FormAddStudent onAddStudent={addStudent}/>
+      <FormAddStudent onAddStudent={addStudent} onRegisterStudent={registerStudent}/>
     
       <h1>dodaj nauczyciela</h1>
-      <FormAddTeacher onAddTeacher={addTeacher}/>
+      <FormAddTeacher onAddTeacher={addTeacher} onRegisterTeacher={registerTeacher}/>
 
       <h1>dodaj lekcje</h1>
       <FormAddLesson onAddLesson={addLesson}/>

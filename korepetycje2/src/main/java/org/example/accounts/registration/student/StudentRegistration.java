@@ -20,4 +20,8 @@ public class StudentRegistration extends Registration {
         this.student=student;
         this.role="student";
     }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

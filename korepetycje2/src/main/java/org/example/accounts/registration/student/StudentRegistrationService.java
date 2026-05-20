@@ -19,15 +19,14 @@ public class StudentRegistrationService {
     }
 
     public StudentRegistration addStudent(StudentRegistrationDTO studentDTO){
-        StudentRegistration studentRegistration=new StudentRegistration();
         Student student=studentRepository.findById(studentDTO.getID()).orElse(null);
-
         StudentRegistration registration=new StudentRegistration();
         registration.setEmail(studentDTO.getEmail());
-        registration.setUsername(studentDTO.getEmail());
+        registration.setUsername(studentDTO.getUsername());
         registration.setHash_password(studentDTO.getHash_password());
-
+        registration.setStudent(student);
         return registrationRepository.save(registration);
+        //return registration;
     }
 
     public void deleteStudent(long id){

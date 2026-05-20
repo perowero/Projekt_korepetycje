@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/api/register/student")
 @CrossOrigin(origins ="http://localhost:5173")
 public class StudentRegistrationController {
     private StudentRegistrationService registrationService;

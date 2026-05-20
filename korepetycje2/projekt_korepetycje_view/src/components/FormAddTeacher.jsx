@@ -1,14 +1,18 @@
 import {useState} from "react";
 
-export const FormAddTeacher=({onAddTeacher})=>{
+export const FormAddTeacher=({onAddTeacher,onRegisterTeacher})=>{
     const [name,setName]=useState("");
     const [surname,setSurname]=useState("");
+    const [username,setUsername]=useState("");
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
 
     return (
         <form
             onSubmit={(e)=>{
                 e.preventDefault();
                 onAddTeacher({name,surname});
+                onRegisterTeacher({username,email,password});
             }}
         >
 
@@ -35,6 +39,45 @@ export const FormAddTeacher=({onAddTeacher})=>{
                     name="surname"
                     placeholder="nazwisko"
                     >
+                </input>
+            </div>
+
+            <div>
+                <input
+                    defaultValue={username}
+                    onChange={(e)=>{
+                        setUsername(e.target.value);
+                    }}
+                    type="text"
+                    name="username"
+                    placeholder="nazwa użytkownika"
+                >
+                </input>
+            </div>
+
+             <div>
+                <input
+                    defaultValue={email}
+                    onChange={(e)=>{
+                        setEmail(e.target.value);
+                    }}
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                >
+                </input>
+            </div>
+
+             <div>
+                <input
+                    defaultValue={password}
+                    onChange={(e)=>{
+                        setPassword(e.target.value);
+                    }}
+                    type="text"
+                    name="password"
+                    placeholder="hasło"
+                >
                 </input>
             </div>
             <button>dodaj</button>

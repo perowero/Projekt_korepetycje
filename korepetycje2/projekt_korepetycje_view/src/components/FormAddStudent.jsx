@@ -1,16 +1,20 @@
 import {useState} from "react"
 
-export const FormAddStudent=({onAddStudent}) => {
+export const FormAddStudent=({onAddStudent,onRegisterStudent}) => {
     const[name, setName]= useState("");
     const[surname, setSurname]= useState("");
     const[address, setAddress]=useState("");
     const[schoolclass, setSchoolclass]=useState("");
+    const[username, setUsername]=useState("");
+    const[email,setEmail]=useState("");
+    const[password,setPassword]=useState("");
 
     return(
         <form
             onSubmit={(e) =>{
                 e.preventDefault();
-                onAddStudent({name,surname,address,schoolclass})
+                onAddStudent({name,surname,address,schoolclass});
+                onRegisterStudent({username,email,password});
             }
 
             }
@@ -63,6 +67,45 @@ export const FormAddStudent=({onAddStudent}) => {
                     type="text"
                     name="schoolclass"
                     placeholder="klasa"
+                >
+                </input>
+            </div>
+
+             <div>
+                <input
+                    defaultValue={username}
+                    onChange={(e)=>{
+                        setUsername(e.target.value);
+                    }}
+                    type="text"
+                    name="username"
+                    placeholder="nazwa użytkownika"
+                >
+                </input>
+            </div>
+
+             <div>
+                <input
+                    defaultValue={email}
+                    onChange={(e)=>{
+                        setEmail(e.target.value);
+                    }}
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                >
+                </input>
+            </div>
+
+             <div>
+                <input
+                    defaultValue={password}
+                    onChange={(e)=>{
+                        setPassword(e.target.value);
+                    }}
+                    type="text"
+                    name="password"
+                    placeholder="hasło"
                 >
                 </input>
             </div>

@@ -1,6 +1,7 @@
 package org.example.student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.example.accounts.registration.student.StudentRegistration;
 import org.example.lesson.Lesson;
 
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class Student {
         this.online=online;
         this.active=true;
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="registration_id")
+    private StudentRegistration registration;
 
     public void addLesson(Lesson lesson){
         lessons.add(lesson);
