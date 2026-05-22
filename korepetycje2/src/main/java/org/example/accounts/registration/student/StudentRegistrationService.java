@@ -1,7 +1,9 @@
 package org.example.accounts.registration.student;
 
+import jakarta.transaction.Transactional;
 import org.example.lesson.Lesson;
 import org.example.student.Student;
+import org.example.student.StudentDTO;
 import org.example.student.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.example.accounts.registration.student.StudentRegistrationRepository;
@@ -18,15 +20,25 @@ public class StudentRegistrationService {
         this.studentRepository=studentRepository;
     }
 
-    public StudentRegistration addStudent(StudentRegistrationDTO studentDTO){
-        Student student=studentRepository.findById(studentDTO.getID()).orElse(null);
+    @Transactional
+    public void addStudent(StudentDTO studentDTO){
         StudentRegistration registration=new StudentRegistration();
         registration.setEmail(studentDTO.getEmail());
         registration.setUsername(studentDTO.getUsername());
-        registration.setHash_password(studentDTO.getHash_password());
-        registration.setStudent(student);
-        return registrationRepository.save(registration);
-        //return registration;
+        registration.setPassword(studentDTO.getPassword());
+        registration.setRole();
+
+        Student student=new Student();
+        student.setName(studentDTO.getName());
+        student.setSurname(studentDTO.getSurname());
+        student.setAdress(studentDTO.getAddress());
+        student.setSchoolclass(studentDTO.getSchoolclass());
+        student.setOnline(false);
+        StudentRegistration registrationbuf=registrationRepository.save(registration);
+        student.setRegistration(registrationbuf);
+        registrationbuf.setStudent(student);
+        Student studentbuf=studentRepository.save(student);
+
     }
 
     public void deleteStudent(long id){

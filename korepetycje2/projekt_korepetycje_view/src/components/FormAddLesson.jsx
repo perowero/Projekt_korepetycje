@@ -13,11 +13,13 @@ export const FormAddLesson=({onAddLesson})=>{
     return(
         <form onSubmit={(e)=>{
             e.preventDefault();
+            console.log("Mój stan student:", student);
+            console.log("Mój stan teacher:", teacher);
             onAddLesson({
                 data: data ? `${data}T00:00:00` : null,
-                prize: parseFloat(prize) || 0.0,       // Konwersja do double
-                student: student ? { id: parseInt(student) } : null, 
-                teacher: teacher ? { id: parseInt(teacher) } : null   
+                prize: parseFloat(prize) || 0.0,       
+                studentId: student, 
+                teacherId: teacher 
             });
         }}>
             <div>

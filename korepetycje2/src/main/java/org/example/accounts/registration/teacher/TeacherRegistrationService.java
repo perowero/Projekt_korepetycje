@@ -1,6 +1,10 @@
 package org.example.accounts.registration.teacher;
 
+import jakarta.transaction.Transactional;
+import org.example.accounts.registration.student.StudentRegistration;
+import org.example.student.Student;
 import org.example.teacher.Teacher;
+import org.example.teacher.TeacherDTO;
 import org.example.teacher.TeacherRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +21,21 @@ public class TeacherRegistrationService {
         this.teacherRepository=teacherRepository;
     }
 
-    public TeacherRegistration addTeacher(TeacherRegistrationDTO teacherDTO){
-        TeacherRegistration teacherRegistration=new TeacherRegistration();
-        Teacher teacher=teacherRepository.findById(teacherDTO.getID()).orElse(null);
-
+    @Transactional
+    public void addTeacher(TeacherDTO teacherDTO){
         TeacherRegistration registration=new TeacherRegistration();
         registration.setEmail(teacherDTO.getEmail());
-        registration.setUsername(teacherDTO.getEmail());
-        registration.setHash_password(teacherDTO.getHash_password());
+        registration.setUsername(teacherDTO.getUsername());
+        registration.setPassword(teacherDTO.getPassword());
+        registration.setRole();
 
-        return registrationRepository.save(registration);
+        Teacher teacher=new Teacher();
+        teacher.setName(teacherDTO.getName());
+        teacher.setSurname(teacherDTO.getSurname());
+        TeacherRegistration registrationbuf=registrationRepository.save(registration);
+        teacher.setRegistration(registrationbuf);
+        registrationbuf.setTeacher(teacher);
+        Teacher teacherbuf=teacherRepository.save(teacher);
     }
 
     public void deleteTeacher(long id){

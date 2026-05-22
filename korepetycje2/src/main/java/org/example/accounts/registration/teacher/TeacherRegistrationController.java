@@ -1,5 +1,6 @@
 package org.example.accounts.registration.teacher;
 
+import org.example.teacher.TeacherDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class TeacherRegistrationController {
     }
 
     @PostMapping
-    public TeacherRegistration registerTeacher(@RequestBody TeacherRegistrationDTO teacher){
-        return registrationService.addTeacher(teacher);
+    public void registerTeacher(@RequestBody TeacherDTO teacher){
+        registrationService.addTeacher(teacher);
     }
 
     @DeleteMapping("/{id}")

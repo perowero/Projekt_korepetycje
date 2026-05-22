@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public abstract class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Transient
     @JsonIgnore
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

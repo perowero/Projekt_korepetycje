@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-export const FormAddStudent=({onAddStudent,onRegisterStudent}) => {
+export const FormAddStudent=({onRegisterStudent}) => {
     const[name, setName]= useState("");
     const[surname, setSurname]= useState("");
     const[address, setAddress]=useState("");
@@ -13,8 +13,7 @@ export const FormAddStudent=({onAddStudent,onRegisterStudent}) => {
         <form
             onSubmit={(e) =>{
                 e.preventDefault();
-                onAddStudent({name,surname,address,schoolclass});
-                onRegisterStudent({username,email,password});
+                onRegisterStudent({name,surname,address,schoolclass,username,email,password});
             }
 
             }

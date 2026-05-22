@@ -8,7 +8,6 @@ import org.example.student.Student;
 @Entity
 public class StudentRegistration extends Registration {
 
-    private Long id;
     @OneToOne
     @JoinColumn(name="student")
     @JsonBackReference("student-registration")
@@ -23,5 +22,9 @@ public class StudentRegistration extends Registration {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public void setRole(){
+        this.role="student";
     }
 }

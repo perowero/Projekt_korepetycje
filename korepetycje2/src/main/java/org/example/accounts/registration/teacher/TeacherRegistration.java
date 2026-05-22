@@ -24,4 +24,8 @@ public class TeacherRegistration extends Registration {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
+    public void setRole(){
+        this.role="teatcher";
+    }
 }

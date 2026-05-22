@@ -11,13 +11,13 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String surname;
     private String adress;
     private int schoolclass;
     private boolean online;
-    private boolean active;
+    private boolean active=true;
 
     @OneToMany(mappedBy="student",cascade=CascadeType.ALL)
     @JsonManagedReference("student-lessons")
@@ -109,5 +109,9 @@ public class Student {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public void setRegistration(StudentRegistration registration) {
+        this.registration = registration;
     }
 }

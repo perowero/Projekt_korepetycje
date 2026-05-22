@@ -2,6 +2,8 @@ package org.example.teacher;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.example.accounts.registration.student.StudentRegistration;
+import org.example.accounts.registration.teacher.TeacherRegistration;
 import org.example.lesson.Lesson;
 
 import java.util.ArrayList;
@@ -14,11 +16,15 @@ public class Teacher {
     private Long id;
     private String name;
     private String surname;
-    private boolean active;
+    private boolean active=true;
 
     @OneToMany(mappedBy="teacher",cascade= CascadeType.ALL)
     @JsonManagedReference("teacher-lessons")
     private List<Lesson> lessons=new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="registration_id")
+    private TeacherRegistration registration;
 
     public Teacher(){}
 
@@ -64,5 +70,9 @@ public class Teacher {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setRegistration(TeacherRegistration registration) {
+        this.registration = registration;
     }
 }
