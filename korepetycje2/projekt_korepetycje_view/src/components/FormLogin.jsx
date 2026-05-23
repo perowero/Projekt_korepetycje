@@ -59,7 +59,7 @@ export const FormLogin=({onLogin})=>{
                     checked={role==="teacher"}
                     />Nauczyciel
             </div>
-            <button>dodaj</button>
+            <button>zaloguj się</button>
 
         </form>
     )
