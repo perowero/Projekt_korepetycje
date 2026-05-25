@@ -17,6 +17,7 @@ export const Login=()=>{
         if(response.ok){
           setIsLogin(true);
           const resData = await response.json();
+          console.log("Odpowiedź z Javy:", resData);
           localStorage.setItem('token', resData.token);
           localStorage.setItem('username', resData.username);
           localStorage.setItem('userRole', resData.role);

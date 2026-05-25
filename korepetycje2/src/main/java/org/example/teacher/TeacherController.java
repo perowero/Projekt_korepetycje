@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/teachers")
-@CrossOrigin(origins = "http://localhost:5173")
 public class TeacherController {
     private TeacherService teacherService;
 

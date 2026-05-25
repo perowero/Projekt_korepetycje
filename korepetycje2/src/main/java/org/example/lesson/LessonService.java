@@ -7,6 +7,8 @@ import org.example.teacher.Teacher;
 import org.example.teacher.TeacherRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,5 +50,9 @@ public class LessonService {
 
     public void deleteLesson(Lesson lesson){
         lessonRepository.delete(lesson);
+    }
+
+    public List<Lesson> lessonUserPeriod(LocalDateTime startData, LocalDateTime endData, String user){
+        return lessonRepository.findByStudent_Registration_UsernameAndDataBetween(user,startData,endData);
     }
 }
