@@ -11,7 +11,6 @@ public class JwtResponse {
         this.role = role;
     }
 
-    // Gettery i Settery
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
     public String getUsername() { return username; }
