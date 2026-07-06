@@ -55,4 +55,12 @@ public class LessonService {
     public List<Lesson> lessonUserPeriod(LocalDateTime startData, LocalDateTime endData, String user){
         return lessonRepository.findByStudent_Registration_UsernameAndDataBetween(user,startData,endData);
     }
+
+    public List<Lesson> allLessonsPeriod(LocalDateTime start, LocalDateTime end) {
+        return lessonRepository.findAllByDataBetween(start, end);
+    }
+
+    public List<Lesson> lessonsForTeacherPeriod(LocalDateTime start, LocalDateTime end, String username) {
+        return lessonRepository.findAllByTeacherRegistrationUsernameAndDataBetween(username, start, end);
+    }
 }

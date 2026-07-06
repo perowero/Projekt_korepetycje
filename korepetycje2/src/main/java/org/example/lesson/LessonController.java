@@ -50,6 +50,16 @@ public class LessonController {
         LocalDateTime start=startlocal.atStartOfDay();
         LocalDateTime end=endlocal.atTime(23,59,59);
         String username=authentication.getName();
-        return lessonService.lessonUserPeriod(start,end,username);
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+
+        if (role.equals("ROLE_ADMIN") || role.equals("ADMIN")) {
+            return lessonService.allLessonsPeriod(start, end);
+        }
+
+        if (role.equals("ROLE_TEACHER") || role.equals("TEACHER")) {
+            return lessonService.lessonsForTeacherPeriod(start, end, username);
+        }
+
+        return lessonService.lessonUserPeriod(start, end, username);
     }
 }

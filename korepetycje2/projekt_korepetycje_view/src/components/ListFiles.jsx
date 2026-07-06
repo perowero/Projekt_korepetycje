@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import downloadFile from "../operations/DownloadFile.js";
+import { AddFile } from "../operations/AddFile.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const ListFiles = () => {
   const [files, setFiles] = useState([]);
   const token = localStorage.getItem('token');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:8080/api/files", {
@@ -34,6 +38,12 @@ export const ListFiles = () => {
             <h2 className="font-bold text-2xl text-white tracking-tight">
               LISTA PLIKÓW
             </h2>
+            <button 
+                onClick={() => navigate("/addFile")} 
+                className="text-xs bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-xl transition-all"
+              >
+                dodaj plik
+            </button>
             <p className="text-xs text-slate-400 mt-1">
               Przeglądaj i pobieraj materiały udostępnione w systemie
             </p>

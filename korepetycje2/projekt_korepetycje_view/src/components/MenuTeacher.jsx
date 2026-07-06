@@ -76,6 +76,17 @@ export const MenuTeacher = () => {
           <span>Pliki</span>
         </button>
 
+        <button 
+          onClick={() => navigate("/logout")}
+          className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5  ${
+            isActive("/logout")
+              ? " border-transparent text-white shadow-md shadow-sky-600/10"
+              : " text-slate-400 hover:text-indigo-300 hover:bg-indigo-600/10 hover:border-indigo-900/40"
+          }`}
+        >
+          <span>Wyloguj</span>
+        </button>
+
       </div>
     </nav>
   );

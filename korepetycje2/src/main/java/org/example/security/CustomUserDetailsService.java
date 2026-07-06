@@ -1,9 +1,11 @@
 package org.example.security;
 
+import org.example.accounts.registration.admin.AdminRegistrationRepository;
 import org.example.accounts.registration.student.StudentRegistration;
 import org.example.accounts.registration.student.StudentRegistrationRepository;
 import org.example.accounts.registration.teacher.TeacherRegistration;
 import org.example.accounts.registration.teacher.TeacherRegistrationRepository;
+import org.example.admin.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +24,22 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private TeacherRegistrationRepository teacherRepository;
 
+    @Autowired
+    private AdminRegistrationRepository adminRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 1. Najpierw szukamy w tabeli studentów
+        Optional<Admin> admin = adminRepository.findByUsername(username);
+        if (admin.isPresent()) {
+            Admin a = admin.get();
+            return User.builder()
+                    .username(a.getUsername())
+                    .password(a.getPassword())
+                    .roles("ADMIN") // Zwróci rolę ROLE_ADMIN do Spring Security
+                    .build();
+        }
+
         Optional<StudentRegistration> student = studentRepository.findByUsername(username);
         if (student.isPresent()) {
             StudentRegistration s = student.get();

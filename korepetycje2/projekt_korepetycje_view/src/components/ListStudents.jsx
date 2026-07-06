@@ -34,9 +34,6 @@ export const ListStudents = () => {
             <h2 className="font-bold text-2xl text-white tracking-tight">
               LISTA UCZNIÓW
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Zarządzaj profilami podopiecznych, sprawdzaj klasy oraz dane kontaktowe
-            </p>
           </div>
           <span className="bg-slate-900 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-800">
             Aktywni: {students.length}
@@ -98,12 +95,7 @@ export const ListStudents = () => {
                   </div>
                 </div>
 
-                {/* Dolna sekcja: Opcjonalny przycisk podglądu/akcji */}
-                <div className="mt-5 pt-1">
-                  <button className="w-full py-2 bg-slate-950 hover:bg-slate-850 text-slate-400 hover:text-slate-200 text-xs font-medium rounded-xl border border-slate-850 transition-all cursor-pointer text-center">
-                    Szczegóły profilu
-                  </button>
-                </div>
+                
 
               </div>
             ))}

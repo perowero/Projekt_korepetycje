@@ -20,6 +20,7 @@ export const Calendary = () => {
     ImportLessons(startdate, enddate)
       .then((data) => {
         if (data) {
+          console.log("lekcje dane", data);
           setLessons(data);
         }
       })
@@ -57,66 +58,84 @@ export const Calendary = () => {
       {/* Główna siatka kalendarza */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '5px', marginTop: '10px' }}>
         {calendarCells.map((cell) => {
-          
-         
-          const dayLessons = cell.fullDate && Array.isArray(lessons)
-            ? lessons.filter(lesson => {
-                
-                const lessonDateFull = lesson.data || lesson.date;
-                if (!lessonDateFull) return false;
+  // 1. FILTROWANIE LEKCJI DLA DANEGO DNIA
+  const dayLessons = cell.fullDate && Array.isArray(lessons)
+    ? lessons.filter(lesson => {
+        if (!lesson.data) return false;
 
-             
-                const lessonDateShort = lessonDateFull.includes('T') 
-                  ? lessonDateFull.split('T')[0] 
-                  : lessonDateFull;
+        let lessonDateShort = "";
 
-                return lessonDateShort === cell.fullDate;
-              })
-            : [];
+        // Jeśli Spring przesłał datę jako String (np. "2026-07-06T14:30:00" lub "2026-07-06 14:30:00")
+        if (typeof lesson.data === 'string') {
+          lessonDateShort = lesson.data.includes('T') 
+            ? lesson.data.split('T')[0] 
+            : lesson.data.split(' ')[0];
+        } 
+        // Jeśli Spring przesłał datę jako tablicę liczb (np. [2026, 7, 6, 14, 30])
+        else if (Array.isArray(lesson.data)) {
+          const yearStr = lesson.data[0];
+          const monthStr = String(lesson.data[1]).padStart(2, '0');
+          const dayStr = String(lesson.data[2]).padStart(2, '0');
+          lessonDateShort = `${yearStr}-${monthStr}-${dayStr}`;
+        }
 
-        
+        // Porównujemy wyciągniętą datę z datą kafelka (np. "2026-07-06")
+        return lessonDateShort === cell.fullDate;
+      })
+    : [];
+
+  return (
+    <div 
+      key={cell.id} 
+      style={{ 
+        border: cell.dayNumber ? '1px solid #444' : 'none', 
+        minHeight: '80px', 
+        padding: '5px',
+        backgroundColor: cell.dayNumber ? '#222' : 'transparent',
+        color: '#fff',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+      }}
+    >
+      <div style={{ fontSize: '12px', fontWeight: 'bold' }}>{cell.dayNumber}</div>
+      
+      {/* LISTA LEKCJI W DANYM DNIU */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginTop: '5px' }}>
+        {dayLessons.map((lesson) => {
+          let hour = "";
+
+          // Bezpieczne wyciąganie godziny (String)
+          if (typeof lesson.data === 'string' && lesson.data.includes('T')) {
+            hour = lesson.data.split('T')[1].substring(0, 5);
+          } else if (typeof lesson.data === 'string' && lesson.data.includes(' ')) {
+            hour = lesson.data.split(' ')[1].substring(0, 5);
+          }
+          // Bezpieczne wyciąganie godziny (Tablica liczb [rr, mm, dd, gg, mm])
+          else if (Array.isArray(lesson.data) && lesson.data.length >= 5) {
+            const hStr = String(lesson.data[3]).padStart(2, '0');
+            const mStr = String(lesson.data[4]).padStart(2, '0');
+            hour = `${hStr}:${mStr}`;
+          }
+
           return (
             <div 
-              key={cell.id} 
+            
+              key={lesson.id} 
               style={{ 
-                border: cell.dayNumber ? '1px solid #444' : 'none', 
-                minHeight: '80px', 
-                padding: '5px',
-                backgroundColor: cell.dayNumber ? '#222' : 'transparent',
-                color: '#fff',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
+                backgroundColor: '#0284c7', 
+                fontSize: '9px', 
+                padding: '2px', 
+                borderRadius: '3px',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap'
               }}
+              title={`Lekcja o ${hour}, Cena: ${lesson.prize} zł`}
             >
-             
-              <div style={{ fontSize: '12px', fontWeight: 'bold' }}>{cell.dayNumber}</div>
-              
-             
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginTop: '5px' }}>
-                {dayLessons.map((lesson) => {
-                  // Wyciągamy samą godzinę do wyświetlenia (np. "14:30")
-                  const hour = lesson.data && lesson.data.includes('T')
-                    ? lesson.data.split('T')[1].substring(0, 5)
-                    : '';
-
-                  return (
-                    <div 
-                      key={lesson.id} 
-                      style={{ 
-                        backgroundColor: '#0284c7', 
-                        fontSize: '9px', 
-                        padding: '2px', 
-                        borderRadius: '3px',
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden',
-                        whiteSpace: 'nowrap'
-                      }}
-                      title={`Lekcja o ${hour}`}
-                    >
-                      {hour ? `[${hour}] ` : ''} Lekcja #{lesson.id}
-                    </div>
-                  );
+              {hour ? `[${hour}] ` : ''} Lekcja #{lesson.id}
+            </div>
+          );
                 })}
               </div>
             </div>

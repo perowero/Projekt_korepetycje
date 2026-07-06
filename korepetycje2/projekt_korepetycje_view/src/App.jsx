@@ -10,6 +10,7 @@ import { Calendary } from './components/Calendary';
 import { AddFile } from './operations/AddFile';
 import { ListFiles } from './components/ListFiles';
 import { MenuTeacher} from './components/MenuTeacher';
+import { Logout } from './components/Logout';
 
 const TeacherLayout = () => {
   return (
@@ -34,7 +35,8 @@ const router=createBrowserRouter([
       { path: "/showTeachers", element: <ShowTeachers /> },
       { path: "/calendary", element: <Calendary /> },
       { path: "/addFile", element: <AddFile /> },
-      { path: "/downloadFile", element: <ListFiles /> }
+      { path: "/downloadFile", element: <ListFiles /> },
+      { path: "/logout", element: <Logout/>}
     ]
   },
 

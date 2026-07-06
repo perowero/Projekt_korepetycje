@@ -1,6 +1,8 @@
 import { FormAddFile } from "../components/FormAddFile";
+import { useNavigate } from "react-router-dom";
 
 export const AddFile=()=>{
+  const navigate = useNavigate();
   const addFile=async ({filename,file})=>{
     const formData = new FormData();
     formData.append("file", file);
@@ -15,6 +17,7 @@ export const AddFile=()=>{
         if(response.ok){
           alert("zapisano plik");
         }
+        navigate("/downloadFile")
       }catch(error){
         console.error('brak połączenia z javą',error);
       }

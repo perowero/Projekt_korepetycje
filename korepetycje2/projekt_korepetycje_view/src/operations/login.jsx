@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { FormLogin } from '../components/FormLogin';
 import { Logout } from '../components/Logout';
 
@@ -30,9 +31,8 @@ export const Login=()=>{
 
     return(
       <>
-      <h1>zaloguj się</h1>
       <FormLogin onLogin={login}/>
-        {isLogin&&<Logout setIsLogin={setIsLogin}/>}
-      </>
+        {isLogin&&<Navigate to="/calendary" replace />}
+      </> 
     );
   };
