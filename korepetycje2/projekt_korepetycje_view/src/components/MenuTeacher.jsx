@@ -4,7 +4,6 @@ export const MenuTeacher = () => {
   const navigate = useNavigate();
   const location = useLocation(); 
 
-  // Pomocnicza funkcja sprawdzająca, czy dany przycisk jest aktualnie włączony
   const isActive = (path) => location.pathname === path;
 
   return (

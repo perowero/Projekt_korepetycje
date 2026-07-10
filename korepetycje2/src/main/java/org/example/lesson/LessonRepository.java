@@ -12,4 +12,6 @@ public interface LessonRepository extends JpaRepository<Lesson,Long> {
     List<Lesson> findByStudent_Registration_UsernameAndDataBetween(String username, LocalDateTime start, LocalDateTime end);
     List<Lesson> findAllByDataBetween(LocalDateTime start, LocalDateTime end);
     List<Lesson> findAllByTeacherRegistrationUsernameAndDataBetween(String username, LocalDateTime start, LocalDateTime end);
+    List<Lesson> findAllByStudentIdAndTeacherIdAndIspaid(long id_student,long id_teacher, boolean paid);
+    List<Lesson> findAllByStudentRegistrationUsernameAndIspaid(String username,boolean ispaid);
 }

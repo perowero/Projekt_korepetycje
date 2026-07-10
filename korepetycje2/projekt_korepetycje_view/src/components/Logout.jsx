@@ -5,8 +5,6 @@ export const Logout = ({ setIsLogin }) => {
   const navigate = useNavigate();
   const hasRun = useRef(false);
 
-  // Używamy useEffect, aby kod czyszczący wykonał się dokładnie w momencie,
-  // gdy React Router spróbuje załadować tę podstronę
   useEffect(() => {
 
     if (hasRun.current) return;

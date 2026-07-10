@@ -63,4 +63,12 @@ public class LessonService {
     public List<Lesson> lessonsForTeacherPeriod(LocalDateTime start, LocalDateTime end, String username) {
         return lessonRepository.findAllByTeacherRegistrationUsernameAndDataBetween(username, start, end);
     }
+
+    public List<Lesson>getPayments(long student_id, long teacher_id, boolean ispaid){
+        return lessonRepository.findAllByStudentIdAndTeacherIdAndIspaid(student_id,teacher_id,ispaid);
+    }
+
+    public List<Lesson>getStudentPayments(String username,boolean ispaid){
+        return lessonRepository.findAllByStudentRegistrationUsernameAndIspaid(username,ispaid);
+    }
 }

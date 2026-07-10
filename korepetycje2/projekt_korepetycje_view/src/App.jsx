@@ -11,6 +11,9 @@ import { AddFile } from './operations/AddFile';
 import { ListFiles } from './components/ListFiles';
 import { MenuTeacher} from './components/MenuTeacher';
 import { Logout } from './components/Logout';
+import { DashboardStudent } from './components/DashboardPaymentsStudent';
+import { MenuStudent } from './components/MenuStudent';
+import { PaymentRedirect } from './components/PaymentRedirect';
 
 const TeacherLayout = () => {
   return (
@@ -22,6 +25,18 @@ const TeacherLayout = () => {
     </CheckIsToken>
   );
 };
+
+const StudentLayout = () => {
+  return (
+    <CheckIsToken>
+      <MenuStudent /> 
+      <div>
+        <Outlet /> 
+      </div>
+    </CheckIsToken>
+  );
+};
+
 const router=createBrowserRouter([
   { path: "/login", element: <Login /> },
 
@@ -36,7 +51,20 @@ const router=createBrowserRouter([
       { path: "/calendary", element: <Calendary /> },
       { path: "/addFile", element: <AddFile /> },
       { path: "/downloadFile", element: <ListFiles /> },
-      { path: "/logout", element: <Logout/>}
+      { path: "/logout", element: <Logout/>},
+      { path: "/paymentRedirect", element: <PaymentRedirect/>}
+    ]
+  },
+
+  {
+    element: <StudentLayout />, 
+    children: [
+      { path: "/calendary", element: <Calendary /> },
+      { path: "/addFile", element: <AddFile /> },
+      { path: "/downloadFile", element: <ListFiles /> },
+      { path: "/logout", element: <Logout/>},
+      { path: "/paymentsStudent", element: <DashboardStudent/>},
+      { path: "/paymentRedirect", element: <PaymentRedirect/>}
     ]
   },
 

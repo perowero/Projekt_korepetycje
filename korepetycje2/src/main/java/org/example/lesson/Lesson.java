@@ -14,6 +14,7 @@ public class Lesson {
     private long id;
     private LocalDateTime data;
     private double prize;
+    private boolean ispaid;
 
     Lesson(){}
 
@@ -22,6 +23,7 @@ public class Lesson {
         this.prize=prize;
         this.student=student;
         this.teacher=teacher;
+        this.ispaid=false;
     }
 
     @ManyToOne

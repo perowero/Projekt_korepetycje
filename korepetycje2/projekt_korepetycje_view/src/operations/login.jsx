@@ -5,6 +5,7 @@ import { Logout } from '../components/Logout';
 
 export const Login=()=>{
   const [isLogin,setIsLogin]=useState(false);
+  const [role,setRole]=useState(null);
   const login=async (data)=>{
       try{
         const response=await fetch('http://localhost:8080/api/auth/login',{
@@ -22,6 +23,7 @@ export const Login=()=>{
           localStorage.setItem('token', resData.token);
           localStorage.setItem('username', resData.username);
           localStorage.setItem('userRole', resData.role);
+          setRole(resData.role);
           alert("zalogowano");
         }
       }catch(error){
@@ -31,8 +33,10 @@ export const Login=()=>{
 
     return(
       <>
+      {console.log(role)}
       <FormLogin onLogin={login}/>
-        {isLogin&&<Navigate to="/calendary" replace />}
+        {role === "teacher" && <Navigate to="/calendary" replace />}
+        {role === "student" && <Navigate to="/paymentsStudent" replace />}
       </> 
     );
   };

@@ -94,7 +94,6 @@ export const ListStudents = () => {
                     </div>
                   </div>
                 </div>
-
                 
 
               </div>

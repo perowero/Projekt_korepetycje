@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.example.student.Student;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,5 +62,25 @@ public class LessonController {
         }
 
         return lessonService.lessonUserPeriod(start, end, username);
+    }
+
+    @GetMapping("/payments/{id_student}{id_teacher}{paid}")
+    public List<Lesson> getPayments(@PathVariable long id_student, @PathVariable long id_teacher, @PathVariable boolean paid){
+        List<Lesson>lessons=lessonService.getPayments(id_student,id_teacher,paid);
+        return lessons;
+    }
+
+    @GetMapping("/private-payments")
+    public ResponseEntity<List<Lesson>> getStudentPayments(Authentication authentication){
+        String username = authentication.getName();
+        List<Lesson>lessons=lessonService.getStudentPayments(username,true);
+        return ResponseEntity.ok(lessons);
+    }
+
+    @GetMapping("/private-unpayments")
+    public ResponseEntity<List<Lesson>> getStudentUnpayments(Authentication authentication){
+        String username = authentication.getName();
+        List<Lesson>lessons=lessonService.getStudentPayments(username,false);
+        return ResponseEntity.ok(lessons);
     }
 }
