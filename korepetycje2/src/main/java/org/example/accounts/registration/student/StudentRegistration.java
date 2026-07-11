@@ -15,7 +15,7 @@ public class StudentRegistration extends Registration {
 
     StudentRegistration(){};
 
-    StudentRegistration(Student student){
+    public StudentRegistration(Student student){
         this.student=student;
         this.role="student";
     }

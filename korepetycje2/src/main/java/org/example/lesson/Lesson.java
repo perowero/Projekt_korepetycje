@@ -67,6 +67,10 @@ public class Lesson {
         return teacher;
     }
 
+    public boolean getIspaid() {
+        return ispaid;
+    }
+
     public void setStudent(Student student) {
         this.student = student;
     }
@@ -81,6 +85,10 @@ public class Lesson {
 
     public void setPrize(double prize) {
         this.prize = prize;
+    }
+
+    public void setPaid(boolean paid){
+        this.ispaid=paid;
     }
 }
 

@@ -1,11 +1,18 @@
 package org.example;
 
 import jakarta.transaction.Transactional;
+import org.example.accounts.registration.student.StudentRegistration;
+import org.example.accounts.registration.student.StudentRegistrationRepository;
+import org.example.accounts.registration.student.StudentRegistrationService;
+import org.example.accounts.registration.teacher.TeacherRegistrationRepository;
+import org.example.accounts.registration.teacher.TeacherRegistrationService;
 import org.example.lesson.Lesson;
 import org.example.lesson.LessonRepository;
 import org.example.student.Student;
+import org.example.student.StudentDTO;
 import org.example.student.StudentRepository;
 import org.example.teacher.Teacher;
+import org.example.teacher.TeacherDTO;
 import org.example.teacher.TeacherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +32,11 @@ public class Main {
     public CommandLineRunner testDatabase(
             StudentRepository studentRepo,
             TeacherRepository teacherRepo,
-            LessonRepository lessonRepo) {
+            LessonRepository lessonRepo,
+            StudentRegistrationRepository studentRegistrationRepo,
+            StudentRegistrationService studentRegistrationService,
+            TeacherRegistrationRepository teacherRegistrationRepo,
+            TeacherRegistrationService teacherRegistrationService) {
 
         return args -> {
             System.out.println("\n--- ETAP 1: DODAWANIE UŻYTKOWNIKÓW ---");
@@ -68,6 +79,12 @@ public class Main {
             lessonRepo.findAll().forEach(System.out::println);
 
             System.out.println("\n--- KONIEC TESTU ---");
+
+            StudentDTO studentDTOTest1=new StudentDTO("student","student","student",4,"student","shdrbvg@hcbd.pl","haslo");
+            studentRegistrationService.addStudent(studentDTOTest1);
+
+            TeacherDTO teacherDTOTest1=new TeacherDTO("teacher","teacher","teacher","gygyg@hfdd.pl","haslo");
+            teacherRegistrationService.addTeacher(teacherDTOTest1);
         };
     }
 }

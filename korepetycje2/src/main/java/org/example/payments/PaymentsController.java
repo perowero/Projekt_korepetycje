@@ -1,12 +1,18 @@
 package org.example.payments;
 
 import com.stripe.Stripe;
+import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
+import com.stripe.model.EventDataObjectDeserializer;
+import com.stripe.model.StripeObject;
+import com.stripe.net.Webhook;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.example.lesson.Lesson;
 import org.example.lesson.LessonRepository;
 import com.stripe.model.checkout.Session;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +32,9 @@ public class PaymentsController {
 
     @Value("${stripe.secret.key}")
     private String secretKey;
+
+    @Value("${stripe.webhook.secret}")
+    private String endpointSecret;
 
     @PostMapping("/checkout/{lessonId}")
     public ResponseEntity<Map<String,String>> createCheckoutSession(@PathVariable long lessonId){
@@ -70,5 +79,56 @@ public class PaymentsController {
             System.err.println("Błąd Stripe: " + e.getMessage());
             return ResponseEntity.status(500).body(Map.of("error", "Błąd generowania płatności"));
         }
+    }
+    @PostMapping("/webhook")
+    public ResponseEntity<String> handleStripeWebhook(
+            @RequestBody String payload,
+            @RequestHeader("Stripe-Signature") String sigHeader) {
+
+        System.out.println("📥 [WEBHOOK] Stripe właśnie przysłał powiadomienie!");
+        Event event;
+
+        try {
+            event = Webhook.constructEvent(payload, sigHeader, endpointSecret);
+            System.out.println("🔑 [WEBHOOK] Podpis zweryfikowany pomyślnie. Typ zdarzenia: " + event.getType());
+        } catch (SignatureVerificationException e) {
+            System.err.println("❌ [WEBHOOK] Niepoprawny podpis: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Błędny podpis");
+        }
+
+        if ("checkout.session.completed".equals(event.getType())) {
+            System.out.println("🎉 [WEBHOOK] Rozpoznano udaną płatność checkout.session.completed");
+
+            try {
+                EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
+                Session session = null;
+
+                if (deserializer.getObject().isPresent()) {
+                    session = (Session) deserializer.getObject().get();
+                } else {
+                    // Jeśli standardowe pobranie zawiodło, wymuszamy bezpieczną deserializację asynchroniczną
+                    session = (Session) deserializer.deserializeUnsafe();
+                }
+
+                if (session != null) {
+                    Map<String, String> metadata = session.getMetadata();
+
+                    if (metadata != null && metadata.containsKey("lessonId")) {
+                        long lessonId = Long.parseLong(metadata.get("lessonId"));
+                        Lesson lesson = lessonRepository.findById(lessonId).orElse(null);
+                        if (lesson != null) {
+                            ;
+                            lesson.setPaid(true);
+                            lessonRepository.save(lesson);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Błąd podczas przetwarzania sesji: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        return ResponseEntity.ok("Odebrano");
     }
 }

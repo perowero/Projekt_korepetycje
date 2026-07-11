@@ -24,6 +24,20 @@ public class StudentDTO {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
+    public StudentDTO(String name, String surname, String address, int schoolclass, String username, String email, String password){
+        this.name=name;
+        this.surname=surname;
+        this.address=address;
+        this.schoolclass=schoolclass;
+        this.username=username;
+        this.email=email;
+        this.password=password;
+    }
+
+    public StudentDTO(){
+
+    }
+
     boolean checkAllAtrributes(){
         if(name==null || surname==null || address==null || schoolclass==0 || username==null || email==null || password==null){
             return false;

@@ -48,13 +48,15 @@ public class SecurityConfig {
                 // Włączamy CORS przy użyciu naszego nowego Beana corsFilter()
                 .cors(Customizer.withDefaults())
 
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf
+                        .disable())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**", "/api/register/**", "/h2-console/**").permitAll()
+                        .requestMatchers("/api/payments/webhook").permitAll()
                         .requestMatchers("/api/files/**").authenticated()
                         .anyRequest().authenticated()
                 );
