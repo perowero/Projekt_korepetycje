@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/api/register/**", "/h2-console/**").permitAll()
                         .requestMatchers("/api/payments/webhook").permitAll()
                         .requestMatchers("/api/files/**").authenticated()
+                        .requestMatchers("/api/lessons/**").authenticated()
                         .anyRequest().authenticated()
                 );
 

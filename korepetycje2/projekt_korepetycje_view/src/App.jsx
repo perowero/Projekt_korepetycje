@@ -14,6 +14,7 @@ import { Logout } from './components/Logout';
 import { DashboardStudent } from './components/DashboardPaymentsStudent';
 import { MenuStudent } from './components/MenuStudent';
 import { PaymentRedirect } from './components/PaymentRedirect';
+import { DashboardPaymentTeacher } from './components/DashboardPaymentsTeacher';
 
 const TeacherLayout = () => {
   return (
@@ -52,7 +53,8 @@ const router=createBrowserRouter([
       { path: "/addFile", element: <AddFile /> },
       { path: "/downloadFile", element: <ListFiles /> },
       { path: "/logout", element: <Logout/>},
-      { path: "/paymentRedirect", element: <PaymentRedirect/>}
+      { path: "/paymentRedirect", element: <PaymentRedirect/>},
+      { path: "/paymentsTeacher", element: <DashboardPaymentTeacher/>}
     ]
   },
 

@@ -83,4 +83,32 @@ public class LessonController {
         List<Lesson>lessons=lessonService.getStudentPayments(username,false);
         return ResponseEntity.ok(lessons);
     }
+
+    @GetMapping("/teacher-payments-all")
+    public ResponseEntity<List<Lesson>> getTeacherPayments(Authentication authentication){
+        String username = authentication.getName();
+        List<Lesson> lessons = lessonService.getTeacherPayments(username, true);
+        return ResponseEntity.ok(lessons);
+    }
+
+    @GetMapping("/teacher-unpayments-all")
+    public ResponseEntity<List<Lesson>> getTeacherUnpayments(Authentication authentication){
+        String username = authentication.getName();
+        List<Lesson> lessons = lessonService.getTeacherPayments(username, false);
+        return ResponseEntity.ok(lessons);
+    }
+
+    @GetMapping("/teacher-payments-student/{studentId}")
+    public ResponseEntity<List<Lesson>>getTeacherStudentPayments(Authentication authentication, @PathVariable long studentId){
+        String username = authentication.getName();
+        List<Lesson>lessons=lessonService.getTeacherPaymentsStudent(username,studentId,true);
+        return ResponseEntity.ok(lessons);
+    }
+
+    @GetMapping("/teacher-unpayments-student/{studentId}")
+    public ResponseEntity<List<Lesson>>getTeacherStudentUnpayments(Authentication authentication, @PathVariable long studentId){
+        String username = authentication.getName();
+        List<Lesson>lessons=lessonService.getTeacherPaymentsStudent(username,studentId,false);
+        return ResponseEntity.ok(lessons);
+    }
 }

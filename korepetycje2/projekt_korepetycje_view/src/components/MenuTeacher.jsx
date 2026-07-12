@@ -61,6 +61,17 @@ export const MenuTeacher = () => {
           <span className="hidden sm:inline">Kalendarz</span>
         </button>
 
+        <button 
+          onClick={() => navigate("/paymentsTeacher")}
+          className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+            isActive("/paymentsTeacher")
+              ? "bg-sky-600 text-white shadow-md shadow-sky-600/10"
+              : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
+          }`}
+        >
+          <span className="hidden sm:inline">Płatności</span>
+        </button>
+
         
 
         {/* Przycisk: Pliki (Wyróżniony dodatkowo) */}

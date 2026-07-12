@@ -71,4 +71,12 @@ public class LessonService {
     public List<Lesson>getStudentPayments(String username,boolean ispaid){
         return lessonRepository.findAllByStudentRegistrationUsernameAndIspaid(username,ispaid);
     }
+
+    public List<Lesson>getTeacherPayments(String username,boolean ispaid){
+        return lessonRepository.findAllByTeacher_Registration_UsernameAndIspaid(username,ispaid);
+    }
+
+    public List<Lesson>getTeacherPaymentsStudent(String usernameTeacher, long studentId, boolean ispaid){
+        return lessonRepository.findAllByStudentIdAndTeacher_Registration_UsernameAndIspaid(studentId, usernameTeacher, ispaid);
+    }
 }
