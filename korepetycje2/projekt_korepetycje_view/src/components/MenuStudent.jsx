@@ -14,9 +14,9 @@ export const MenuStudent = () => {
 
         {/* Przycisk: Kalendarz */}
         <button 
-          onClick={() => navigate("/calendary")}
+          onClick={() => navigate("/student/calendary")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-            isActive("/calendary")
+            isActive("/student/calendary")
               ? "bg-sky-600 text-white shadow-md shadow-sky-600/10"
               : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
           }`}
@@ -25,9 +25,9 @@ export const MenuStudent = () => {
         </button>
 
         <button 
-          onClick={() => navigate("/paymentsStudent")}
+          onClick={() => navigate("/student/paymentsStudent")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-            isActive("/calendary")
+            isActive("/student/paymentsStudent")
               ? "bg-sky-600 text-white shadow-md shadow-sky-600/10"
               : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
           }`}
@@ -39,9 +39,9 @@ export const MenuStudent = () => {
 
         {/* Przycisk: Pliki (Wyróżniony dodatkowo) */}
         <button 
-          onClick={() => navigate("/downloadFile")}
+          onClick={() => navigate("/student/downloadFile")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5  ${
-            isActive("/downloadFile")
+            isActive("/student/downloadFile")
               ? " border-transparent text-white shadow-md shadow-sky-600/10"
               : " text-slate-400 hover:text-indigo-300 hover:bg-indigo-600/10 hover:border-indigo-900/40"
           }`}
@@ -50,9 +50,9 @@ export const MenuStudent = () => {
         </button>
 
         <button 
-          onClick={() => navigate("/logout")}
+          onClick={() => navigate("/student/logout")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5  ${
-            isActive("/logout")
+            isActive("/student/logout")
               ? " border-transparent text-white shadow-md shadow-sky-600/10"
               : " text-slate-400 hover:text-indigo-300 hover:bg-indigo-600/10 hover:border-indigo-900/40"
           }`}

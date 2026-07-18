@@ -36,6 +36,13 @@ public class LessonService {
         return lessonRepository.save(lesson);
     }
 
+    public Lesson addLessonSummary(LessonSummary lessonSummary, long id){
+        Lesson lesson=findById(id);
+        lesson.setLessonSummary(lessonSummary);
+        lessonRepository.save(lesson);
+        return lesson;
+    }
+
     public List<Lesson> getAll() {
         return lessonRepository.findAll();
     }
@@ -78,5 +85,11 @@ public class LessonService {
 
     public List<Lesson>getTeacherPaymentsStudent(String usernameTeacher, long studentId, boolean ispaid){
         return lessonRepository.findAllByStudentIdAndTeacher_Registration_UsernameAndIspaid(studentId, usernameTeacher, ispaid);
+    }
+
+    public LessonSummary getLessonSummary(long lesson_id){
+        Lesson lesson=findById(lesson_id);
+        LessonSummary lessonSummary=lesson.getLessonSummary();
+        return lessonSummary;
     }
 }

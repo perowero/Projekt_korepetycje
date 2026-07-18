@@ -7,6 +7,7 @@ export const AddFile=()=>{
     const formData = new FormData();
     formData.append("file", file);
     const token = localStorage.getItem('token');
+    const role=localStorage.getItem('userRole');
     try{
         const response=await fetch('http://localhost:8080/api/files/upload',{
           method: 'POST',
@@ -17,7 +18,7 @@ export const AddFile=()=>{
         if(response.ok){
           alert("zapisano plik");
         }
-        navigate("/downloadFile")
+        navigate(`/${role}/downloadFile`)
       }catch(error){
         console.error('brak połączenia z javą',error);
       }

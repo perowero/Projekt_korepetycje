@@ -7,6 +7,7 @@ import java.util.List;
 import org.example.student.Student;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,23 +24,20 @@ public class LessonController {
         return lessonService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Lesson getLessonById(@PathVariable long id){
-        Lesson lesson=lessonService.findById(id);
-        return lesson;
-    }
-
     @PostMapping
+    @PreAuthorize("hasRole('TEACHER')")
     public Lesson addLesson(@RequestBody LessonDTO lesson){
         return lessonService.saveLesson(lesson);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('TEACHER')")
     public void deleteLessonById(@PathVariable long id){
         lessonService.deleteLessonById(id);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('TEACHER')")
     public void deleteLesson(@RequestBody Lesson lesson){
         lessonService.deleteLesson(lesson);
     }
@@ -62,6 +60,12 @@ public class LessonController {
         }
 
         return lessonService.lessonUserPeriod(start, end, username);
+    }
+
+    @GetMapping("/{id_lesson}")
+    public ResponseEntity<Lesson>getLesson(@PathVariable long id_lesson){
+        Lesson lesson=lessonService.findById(id_lesson);
+        return ResponseEntity.ok(lesson);
     }
 
     @GetMapping("/payments/{id_student}{id_teacher}{paid}")
@@ -99,6 +103,7 @@ public class LessonController {
     }
 
     @GetMapping("/teacher-payments-student/{studentId}")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<List<Lesson>>getTeacherStudentPayments(Authentication authentication, @PathVariable long studentId){
         String username = authentication.getName();
         List<Lesson>lessons=lessonService.getTeacherPaymentsStudent(username,studentId,true);
@@ -106,9 +111,23 @@ public class LessonController {
     }
 
     @GetMapping("/teacher-unpayments-student/{studentId}")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<List<Lesson>>getTeacherStudentUnpayments(Authentication authentication, @PathVariable long studentId){
         String username = authentication.getName();
         List<Lesson>lessons=lessonService.getTeacherPaymentsStudent(username,studentId,false);
         return ResponseEntity.ok(lessons);
+    }
+
+    @PostMapping("/addLessonSummary")
+    @PreAuthorize("hasRole('TEACHER')")
+    public LessonSummary addLessonSummary(@RequestBody LessonSummary lessonSummary, @RequestBody long id){
+        lessonService.addLessonSummary(lessonSummary,id);
+        return lessonSummary;
+    }
+
+    @GetMapping("/showLessonSummary/{lesson_id}")
+    public ResponseEntity<LessonSummary>getLessonSummary(@PathVariable long lesson_id){
+        LessonSummary lessonSummary=lessonService.getLessonSummary(lesson_id);
+        return ResponseEntity.ok(lessonSummary);
     }
 }

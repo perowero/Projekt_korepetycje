@@ -4,6 +4,7 @@ import { ChooseTeacher } from "./ChooseTeacher";
 
 export const FormAddLesson = ({ onAddLesson }) => {
   const [data, setData] = useState("");
+  const [hour, setHour] =useState("");
   const [prize, setPrize] = useState("");
   const [student, setStudent] = useState("");
   const [teacher, setTeacher] = useState("");
@@ -33,7 +34,7 @@ export const FormAddLesson = ({ onAddLesson }) => {
             console.log("Mój stan student:", student);
             console.log("Mój stan teacher:", teacher);
             onAddLesson({
-              data: data ? `${data}T00:00:00` : null,
+              data: data ? `${data}T${hour}:00` : null,
               prize: parseFloat(prize) || 0.0,      
               studentId: student?.id || student, // Obsługa ID niezależnie od tego czy stan to obiekt czy czyste ID
               teacherId: teacher?.id || teacher 
@@ -51,6 +52,21 @@ export const FormAddLesson = ({ onAddLesson }) => {
               onChange={(e) => setData(e.target.value)}
               type="date"
               name="date"
+              className="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+              required
+            />
+          </div>
+
+          {/* Pole: godzina  */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
+              Godzina
+            </label>
+            <input 
+              value={hour}
+              onChange={(e) => setHour(e.target.value)}
+              type="time"
+              name="time"
               className="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
               required
             />

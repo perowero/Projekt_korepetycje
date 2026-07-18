@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { deleteStudent } from "../operations/DeleteStudent";
 
 export const ListStudents = () => {
   const [students, setStudents] = useState([]);
@@ -21,6 +22,11 @@ export const ListStudents = () => {
       })
       .catch(err => console.error("Błąd sieci uczniów:", err));
   }, [token]);
+
+  const onDeleteStudent=async (student_id)=>{
+    deleteStudent(student_id);
+    setStudents(students.filter(student => student.id !== student_id));
+  }
 
   return (
     <div className="min-h-[75vh] w-full flex flex-col items-center justify-start font-sans antialiased text-slate-200 p-4 pt-10">
@@ -92,6 +98,11 @@ export const ListStudents = () => {
                         {student.address || "brak zapisanego adresu"}
                       </span>
                     </div>
+                  </div>
+
+                  <div>
+                    {console.log(student)}
+                    <button onClick={()=>onDeleteStudent(student.id)}>usuń ucznia</button>
                   </div>
                 </div>
                 

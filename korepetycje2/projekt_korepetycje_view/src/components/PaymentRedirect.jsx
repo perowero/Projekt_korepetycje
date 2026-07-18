@@ -4,8 +4,8 @@ export const PaymentRedirect=()=>{
     
     return(
         <>
-            {role === "teacher" && <Navigate to="/calendary" replace />}
-            {role === "student" && <Navigate to="/paymentsStudent" replace />}
+            {role === "teacher" && <Navigate to="/teacher/calendary" replace />}
+            {role === "student" && <Navigate to="/student/paymentsStudent" replace />}
         </>
     );
 };

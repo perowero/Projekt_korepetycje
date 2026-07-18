@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const ListFiles = () => {
   const [files, setFiles] = useState([]);
   const token = localStorage.getItem('token');
+  const role = localStorage.getItem('userRole');
 
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export const ListFiles = () => {
   }, [token]);
 
   return (
-    <div className="min-h-[60vh] w-full flex flex-col items-center justify-start font-sans antialiased text-slate-200 p-4 pt-10">
+    <div className="min-h-[60vh] w-full flex flex-col items-center justify-start font-sans antialiased text-slate-200 p-4 pt-24">
       
       {/* Kontener listy plików */}
       <div className="bg-slate-900 shadow-2xl border border-slate-800 p-6 sm:p-8 w-full max-w-2xl rounded-2xl transition-all">
@@ -39,7 +40,7 @@ export const ListFiles = () => {
               LISTA PLIKÓW
             </h2>
             <button 
-                onClick={() => navigate("/addFile")} 
+                onClick={() => navigate(`/${role}/addFile`)} 
                 className="text-xs bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-xl transition-all"
               >
                 dodaj plik

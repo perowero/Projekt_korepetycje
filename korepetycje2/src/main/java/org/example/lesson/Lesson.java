@@ -1,6 +1,7 @@
 package org.example.lesson;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.example.student.Student;
 import org.example.teacher.Teacher;
@@ -15,6 +16,7 @@ public class Lesson {
     private LocalDateTime data;
     private double prize;
     private boolean ispaid;
+    private LessonSummary lessonSummary;
 
     Lesson(){}
 
@@ -26,14 +28,23 @@ public class Lesson {
         this.ispaid=false;
     }
 
-    @ManyToOne
+    public Lesson(LocalDateTime data, double prize, Student student, Teacher teacher,LessonSummary lessonSummary){
+        this.data=data;
+        this.prize=prize;
+        this.student=student;
+        this.teacher=teacher;
+        this.ispaid=false;
+        this.lessonSummary=lessonSummary;
+    }
+
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="student")
-    @JsonBackReference("student-lessons")
+    @JsonIgnoreProperties({"lessons", "hibernateLazyInitializer", "handler"})
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="teacher")
-    @JsonBackReference("teacher-lessons")
+    @JsonIgnoreProperties({"lessons", "hibernateLazyInitializer", "handler"})
     private Teacher teacher;
 
     public long getId(){
@@ -89,6 +100,18 @@ public class Lesson {
 
     public void setPaid(boolean paid){
         this.ispaid=paid;
+    }
+
+    public boolean isIspaid() {
+        return ispaid;
+    }
+
+    public void setLessonSummary(LessonSummary lessonSummary) {
+        this.lessonSummary = lessonSummary;
+    }
+
+    public LessonSummary getLessonSummary() {
+        return lessonSummary;
     }
 }
 

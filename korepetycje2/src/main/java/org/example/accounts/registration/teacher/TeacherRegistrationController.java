@@ -1,6 +1,7 @@
 package org.example.accounts.registration.teacher;
 
 import org.example.teacher.TeacherDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,17 +16,20 @@ public class TeacherRegistrationController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<TeacherRegistration>getAllRegistration(){
         return registrationService.getAll();
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public void registerTeacher(@RequestBody TeacherDTO teacher){
         registrationService.addTeacher(teacher);
     }
 
     @DeleteMapping("/{id}")
-    public void unregisterStudent(@PathVariable long id){
+    @PreAuthorize("hasRole('ADMIN')")
+    public void unregisterTeacher(@PathVariable long id){
         registrationService.deleteTeacher(id);
     }
 }

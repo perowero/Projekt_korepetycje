@@ -15,63 +15,73 @@ import { DashboardStudent } from './components/DashboardPaymentsStudent';
 import { MenuStudent } from './components/MenuStudent';
 import { PaymentRedirect } from './components/PaymentRedirect';
 import { DashboardPaymentTeacher } from './components/DashboardPaymentsTeacher';
+import { LessonInformation } from './components/LessonInformation';
 
 const TeacherLayout = () => {
   return (
-    <CheckIsToken>
+    <>
       <MenuTeacher /> 
       <div>
         <Outlet /> 
       </div>
-    </CheckIsToken>
+    </>
   );
 };
 
 const StudentLayout = () => {
   return (
-    <CheckIsToken>
+    <>
       <MenuStudent /> 
       <div>
         <Outlet /> 
       </div>
-    </CheckIsToken>
+    </>
   );
 };
 
-const router=createBrowserRouter([
+// 2. Strażnika zapinamy bezpośrednio w routerze, owijając nim całe Layouty!
+const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
 
   {
-    element: <TeacherLayout />, 
+    path: "/teacher",
+    element: <CheckIsToken allowedRoles="teacher"><TeacherLayout /></CheckIsToken>, 
     children: [
-      { path: "/addLesson", element: <AddLesson /> },
-      { path: "/registerStudent", element: <RegisterStudent /> },
-      { path: "/registerTeacher", element: <RegisterTeacher /> },
-      { path: "/showStudents", element: <ShowStudents /> },
-      { path: "/showTeachers", element: <ShowTeachers /> },
-      { path: "/calendary", element: <Calendary /> },
-      { path: "/addFile", element: <AddFile /> },
-      { path: "/downloadFile", element: <ListFiles /> },
-      { path: "/logout", element: <Logout/>},
-      { path: "/paymentRedirect", element: <PaymentRedirect/>},
-      { path: "/paymentsTeacher", element: <DashboardPaymentTeacher/>}
+      { path: "addLesson", element: <AddLesson /> },
+      { path: "registerStudent", element: <RegisterStudent /> },
+      { path: "registerTeacher", element: <RegisterTeacher /> },
+      { path: "showStudents", element: <ShowStudents /> },
+      { path: "showTeachers", element: <ShowTeachers /> },
+      { path: "calendary", element: <Calendary /> },
+      { path: "addFile", element: <AddFile /> },
+      { path: "downloadFile", element: <ListFiles /> },
+      { path: "logout", element: <Logout/>},
+      { path: "paymentRedirect", element: <PaymentRedirect/>},
+      { path: "paymentsTeacher", element: <DashboardPaymentTeacher/>},
+      { path: "lessonInformation/:id", element: <LessonInformation/>},
+      { path: "showLessonSummary", element: <LessonSummary/>},
+      { path: "formLessonSummary", element: <FormLessonSummary/>}
     ]
   },
 
   {
-    element: <StudentLayout />, 
+    path: "/student",
+    element: <CheckIsToken allowedRoles="student"><StudentLayout /></CheckIsToken>, 
     children: [
-      { path: "/calendary", element: <Calendary /> },
-      { path: "/addFile", element: <AddFile /> },
-      { path: "/downloadFile", element: <ListFiles /> },
-      { path: "/logout", element: <Logout/>},
-      { path: "/paymentsStudent", element: <DashboardStudent/>},
-      { path: "/paymentRedirect", element: <PaymentRedirect/>}
+      { path: "calendary", element: <Calendary /> },
+      { path: "addFile", element: <AddFile /> },
+      { path: "downloadFile", element: <ListFiles /> },
+      { path: "logout", element: <Logout/>},
+      { path: "paymentsStudent", element: <DashboardStudent/>},
+      { path: "paymentRedirect", element: <PaymentRedirect/>},
+      { path: "lessonInformation/:id", element: <LessonInformation/>},
+      { path: "showLessonSummary", element: <LessonSummary/>}
     ]
   },
 
   { path: "*", element: <Navigate to="/login" replace /> }
 ]);
+
 function App() {
   return <RouterProvider router={router}/>
 }

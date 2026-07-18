@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export const ListLessons = () => {
   const [lessons, setLessons] = useState([]);
-  const token = localStorage.getItem('token'); // Warto dodać token, jeśli API go wymaga
+  const token = localStorage.getItem('token'); 
 
   useEffect(() => {
     fetch("http://localhost:8080/api/lessons", {
