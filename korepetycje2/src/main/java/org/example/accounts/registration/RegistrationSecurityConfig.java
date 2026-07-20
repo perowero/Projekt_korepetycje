@@ -18,14 +18,12 @@ public class RegistrationSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Wyłączone dla Reacta
-                .cors(cors -> cors.disable()) // Wyłączone dla Reacta
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // 1. KLUCZOWA POPRAWKA: Puszczamy absolutnie każdy plik z folderu konsoli H2
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().permitAll()
                 )
-                // 2. DRUGA POPRAWKA: Zezwalamy na otwieranie stron w ramkach (szczególnie dla konsoli H2)
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
                 );

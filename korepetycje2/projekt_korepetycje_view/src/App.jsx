@@ -16,6 +16,8 @@ import { MenuStudent } from './components/MenuStudent';
 import { PaymentRedirect } from './components/PaymentRedirect';
 import { DashboardPaymentTeacher } from './components/DashboardPaymentsTeacher';
 import { LessonInformation } from './components/LessonInformation';
+import { LessonSummary } from './components/LessonSummary';
+import { FormLessonSummary } from './components/FormLessonSummary';
 
 const TeacherLayout = () => {
   return (
@@ -59,8 +61,8 @@ const router = createBrowserRouter([
       { path: "paymentRedirect", element: <PaymentRedirect/>},
       { path: "paymentsTeacher", element: <DashboardPaymentTeacher/>},
       { path: "lessonInformation/:id", element: <LessonInformation/>},
-      { path: "showLessonSummary", element: <LessonSummary/>},
-      { path: "formLessonSummary", element: <FormLessonSummary/>}
+      { path: "showLessonSummary/:id", element: <LessonSummary/>},
+      { path: "formLessonSummary/:id/:issummary", element: <FormLessonSummary/>}
     ]
   },
 
@@ -75,7 +77,7 @@ const router = createBrowserRouter([
       { path: "paymentsStudent", element: <DashboardStudent/>},
       { path: "paymentRedirect", element: <PaymentRedirect/>},
       { path: "lessonInformation/:id", element: <LessonInformation/>},
-      { path: "showLessonSummary", element: <LessonSummary/>}
+      { path: "showLessonSummary/:id", element: <LessonSummary/>}
     ]
   },
 

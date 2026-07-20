@@ -16,7 +16,6 @@ public class Lesson {
     private LocalDateTime data;
     private double prize;
     private boolean ispaid;
-    private LessonSummary lessonSummary;
 
     Lesson(){}
 
@@ -46,6 +45,10 @@ public class Lesson {
     @JoinColumn(name="teacher")
     @JsonIgnoreProperties({"lessons", "hibernateLazyInitializer", "handler"})
     private Teacher teacher;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lesson_summary_id")
+    private LessonSummary lessonSummary;
 
     public long getId(){
         return this.id;

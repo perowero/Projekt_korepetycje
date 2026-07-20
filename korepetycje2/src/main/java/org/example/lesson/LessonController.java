@@ -118,9 +118,9 @@ public class LessonController {
         return ResponseEntity.ok(lessons);
     }
 
-    @PostMapping("/addLessonSummary")
+    @PostMapping("/addLessonSummary/{id}")
     @PreAuthorize("hasRole('TEACHER')")
-    public LessonSummary addLessonSummary(@RequestBody LessonSummary lessonSummary, @RequestBody long id){
+    public LessonSummary addLessonSummary(@RequestBody LessonSummary lessonSummary, @PathVariable long id){
         lessonService.addLessonSummary(lessonSummary,id);
         return lessonSummary;
     }
@@ -129,5 +129,11 @@ public class LessonController {
     public ResponseEntity<LessonSummary>getLessonSummary(@PathVariable long lesson_id){
         LessonSummary lessonSummary=lessonService.getLessonSummary(lesson_id);
         return ResponseEntity.ok(lessonSummary);
+    }
+
+    @GetMapping("/checkSummary/{lesson_id}")
+    public boolean checkSummary(@PathVariable long lesson_id){
+        boolean issummary=lessonService.checkSummary(lesson_id);
+        return issummary;
     }
 }

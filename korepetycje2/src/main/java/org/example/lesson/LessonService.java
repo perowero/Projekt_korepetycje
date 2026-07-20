@@ -1,4 +1,5 @@
 package org.example.lesson;
+import jakarta.transaction.Transactional;
 import org.example.lesson.Lesson;
 import org.example.lesson.LessonRepository;
 import org.example.student.Student;
@@ -36,10 +37,19 @@ public class LessonService {
         return lessonRepository.save(lesson);
     }
 
+    @Transactional
     public Lesson addLessonSummary(LessonSummary lessonSummary, long id){
         Lesson lesson=findById(id);
-        lesson.setLessonSummary(lessonSummary);
-        lessonRepository.save(lesson);
+        LessonSummary existingSummary = lesson.getLessonSummary();
+
+        if (existingSummary != null) {
+            existingSummary.setTopic(lessonSummary.getTopic());
+            existingSummary.setDescription(lessonSummary.getDescription());
+            existingSummary.setIshomework(lessonSummary.isIshomework());
+            existingSummary.setHomework(lessonSummary.getHomework());
+        } else {
+            lesson.setLessonSummary(lessonSummary);
+        }
         return lesson;
     }
 
@@ -91,5 +101,15 @@ public class LessonService {
         Lesson lesson=findById(lesson_id);
         LessonSummary lessonSummary=lesson.getLessonSummary();
         return lessonSummary;
+    }
+
+    public boolean checkSummary(long lesson_id){
+        LessonSummary lessonSummary=getLessonSummary(lesson_id);
+        if(lessonSummary==null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
