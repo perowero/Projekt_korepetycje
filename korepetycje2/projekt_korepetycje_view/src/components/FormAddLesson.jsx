@@ -14,7 +14,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
   return (
     <div className="min-h-[80vh] w-full flex flex-col justify-center items-center font-sans antialiased text-slate-200 p-4">
       
-      {/* Karta formularza logiki dodawania lekcji */}
       <div className="bg-slate-900 shadow-2xl border border-slate-800 px-6 sm:px-10 py-8 w-full max-w-md rounded-2xl transition-all">
         
         <div className="text-center w-full mb-2">
@@ -36,13 +35,12 @@ export const FormAddLesson = ({ onAddLesson }) => {
             onAddLesson({
               data: data ? `${data}T${hour}:00` : null,
               prize: parseFloat(prize) || 0.0,      
-              studentId: student?.id || student, // Obsługa ID niezależnie od tego czy stan to obiekt czy czyste ID
+              studentId: student?.id || student, 
               teacherId: teacher?.id || teacher 
             });
           }}
           className="flex flex-col gap-5"
         >
-          {/* Pole: Data zajęć */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Data lekcji
@@ -57,7 +55,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
             />
           </div>
 
-          {/* Pole: godzina  */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Godzina
@@ -72,7 +69,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
             />
           </div>
 
-          {/* Pole: Cena / Stawka */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Cena za lekcję (PLN)
@@ -88,7 +84,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
             />
           </div>
 
-          {/* Sekcja: Wybór uczestników zajęć */}
           <div className="flex flex-col gap-3 pt-2">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Uczestnicy zajęć
@@ -127,7 +122,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
 
             </div>
 
-            {/* Warunkowe wyświetlanie komponentów wyboru (modal/lista) */}
             {showStudents && (
               <div className="mt-2 p-3 bg-slate-950 border border-slate-850 rounded-xl">
                 <ChooseStudent onSelectStudent={(s) => { setStudent(s); setShowStudents(false); }} selectedStudent={student}/>
@@ -140,7 +134,6 @@ export const FormAddLesson = ({ onAddLesson }) => {
             )}
           </div>
 
-          {/* Przycisk Główny */}
           <div className="w-full pt-3">
             <button className="w-full bg-sky-600 hover:bg-sky-500 active:scale-[0.99] text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-sky-600/20 transition-all duration-150 cursor-pointer flex flex-row justify-center items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

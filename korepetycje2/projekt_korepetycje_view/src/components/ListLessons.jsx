@@ -22,10 +22,9 @@ export const ListLessons = () => {
       .catch(err => console.error("Błąd sieci lekcji:", err));
   }, [token]);
 
-  // Pomocnicza funkcja do wyciągania ładnej daty (DD.MM.RRRR) ze stringa z bazy
   const formatDate = (dateString) => {
     if (!dateString) return "-";
-    const datePart = dateString.split("T")[0]; // Odcina czas T00:00:00
+    const datePart = dateString.split("T")[0]; 
     const [year, month, day] = datePart.split("-");
     return `${day}.${month}.${year}`;
   };
@@ -33,7 +32,6 @@ export const ListLessons = () => {
   return (
     <div className="min-h-[70vh] w-full flex flex-col items-center justify-start font-sans antialiased text-slate-200 p-4 pt-10">
       
-      {/* Kontener tabeli */}
       <div className="bg-slate-900 shadow-2xl border border-slate-800 p-6 sm:p-8 w-full max-w-4xl rounded-2xl transition-all">
         
         <div className="flex items-center justify-between mb-2">
@@ -58,11 +56,9 @@ export const ListLessons = () => {
             <span>Brak zaplanowanych lekcji w systemie.</span>
           </div>
         ) : (
-          /* Kontener z overflow-x-auto chroni układ na telefonach komórkowych */
           <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950">
             <table className="w-full text-left border-collapse">
               
-              {/* Nagłówki kolumn */}
               <thead>
                 <tr className="border-b border-slate-800 text-xs font-semibold text-slate-400 uppercase tracking-wider bg-slate-900/50">
                   <th className="py-3.5 px-4">Data</th>
@@ -72,28 +68,23 @@ export const ListLessons = () => {
                 </tr>
               </thead>
               
-              {/* Wiersze z danymi */}
               <tbody className="divide-y divide-slate-850 text-sm">
                 {lessons.map((lesson) => (
                   <tr 
                     key={lesson.id} 
                     className="hover:bg-slate-900/40 transition-colors duration-150 group"
                   >
-                    {/* Kolumna: Data */}
                     <td className="py-3.5 px-4 font-medium text-slate-300 group-hover:text-white transition-colors">
                       {formatDate(lesson.data)}
                     </td>
                     
-                    {/* Kolumna: Uczeń */}
                     <td className="py-3.5 px-4 text-slate-300">
                       <span className="inline-flex items-center gap-1.5">
                         <span className="text-xs">👤</span>
-                        {/* Bezpieczne sprawdzenie: czy student to obiekt z polem name/username, czy sam tekst */}
                         {lesson.student?.name || lesson.student?.username || lesson.student || "Brak danych"}
                       </span>
                     </td>
                     
-                    {/* Kolumna: Nauczyciel */}
                     <td className="py-3.5 px-4 text-slate-300">
                       <span className="inline-flex items-center gap-1.5">
                         <span className="text-xs">👨‍🏫</span>
@@ -101,7 +92,6 @@ export const ListLessons = () => {
                       </span>
                     </td>
                     
-                    {/* Kolumna: Cena */}
                     <td className="py-3.5 px-4 text-right font-semibold text-emerald-400 tracking-tight">
                       {lesson.prize ? `${lesson.prize.toFixed(2)} PLN` : "0.00 PLN"}
                     </td>

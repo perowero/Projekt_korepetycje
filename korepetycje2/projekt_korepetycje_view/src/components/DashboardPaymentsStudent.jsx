@@ -31,7 +31,6 @@ export const DashboardStudent = () => {
     <div className="p-6 bg-slate-950 min-h-screen text-slate-100">
       <div className="max-w-xl mx-auto space-y-6">
         
-        {/* Nagłówek Dashboardu */}
         <div className="border-b border-slate-800 pb-4">
           <h1 className="text-2xl font-bold tracking-tight text-white">Panel Studenta</h1>
           <p className="text-sm text-slate-400 mt-1">Zarządzaj swoimi lekcjami i rozliczeniami</p>

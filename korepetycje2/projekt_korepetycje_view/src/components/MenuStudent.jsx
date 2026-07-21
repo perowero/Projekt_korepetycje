@@ -9,10 +9,8 @@ export const MenuStudent = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-slate-905/80 backdrop-blur-md border-b border-slate-800/60 px-6 py-3 flex items-center justify-between z-50 shadow-lg">
       
-      {/* Grupa przycisków nawigacyjnych po prawej stronie */}
       <div className="flex items-center gap-2">
 
-        {/* Przycisk: Kalendarz */}
         <button 
           onClick={() => navigate("/student/calendary")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
@@ -35,9 +33,6 @@ export const MenuStudent = () => {
           <span className="hidden sm:inline">Płatności</span>
         </button>
 
-        
-
-        {/* Przycisk: Pliki (Wyróżniony dodatkowo) */}
         <button 
           onClick={() => navigate("/student/downloadFile")}
           className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5  ${

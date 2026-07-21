@@ -31,7 +31,6 @@ export const FormLogin=({onLogin})=>{
         >
           <div className="flex flex-col gap-5 py-2">
             
-            {/* Pole: Login / Nazwa użytkownika */}
             <div className="flex flex-col gap-1.5 relative">
               <label className="text-sm font-medium text-slate-300">Nazwa użytkownika</label>
               <div className="relative flex items-center">
@@ -50,7 +49,6 @@ export const FormLogin=({onLogin})=>{
               </div>
             </div>
 
-            {/* Pole: Hasło */}
             <div className="flex flex-col gap-1.5 relative">
               <label className="text-sm font-medium text-slate-300">Hasło</label>
               <div className="relative flex items-center">
@@ -73,7 +71,6 @@ export const FormLogin=({onLogin})=>{
               <label className="text-sm font-medium text-slate-300">Zaloguj jako:</label>
               <div className="grid grid-cols-2 gap-4">
                 
-                {/* Opcja: Uczeń */}
                 <label className={`flex items-center justify-center gap-2 p-3 rounded-xl border cursor-pointer transition-all select-none ${
                   role === "student" 
                     ? "bg-sky-600/10 border-sky-500 text-sky-400 font-semibold" 
@@ -90,7 +87,6 @@ export const FormLogin=({onLogin})=>{
                   <span>👤 Uczeń</span>
                 </label>
 
-                {/* Opcja: Nauczyciel */}
                 <label className={`flex items-center justify-center gap-2 p-3 rounded-xl border cursor-pointer transition-all select-none ${
                   role === "teacher" 
                     ? "bg-sky-600/10 border-sky-500 text-sky-400 font-semibold" 
@@ -110,7 +106,6 @@ export const FormLogin=({onLogin})=>{
               </div>
             </div>
 
-            {/* Przyciski Akcji */}
             <div className="w-full pt-3">
               <button
                 type="submit"

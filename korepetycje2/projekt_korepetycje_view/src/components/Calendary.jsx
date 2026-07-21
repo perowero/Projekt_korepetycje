@@ -71,11 +71,11 @@ export const Calendary = () => {
       maxWidth: '800px', 
       margin: '6rem auto', 
       fontFamily: 'ui-sans-serif, system-ui, sans-serif', 
-      backgroundColor: '#0f172a', // slate-900
-      color: '#f1f5f9', // slate-100
+      backgroundColor: '#0f172a', 
+      color: '#f1f5f9', 
       padding: '1.5rem', 
       borderRadius: '1rem',
-      border: '1px solid #1e293b', // slate-800
+      border: '1px solid #1e293b', 
       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
     }}>
       
@@ -104,15 +104,12 @@ export const Calendary = () => {
         </button>
       </div>
 
-      {/* NAGŁÓWKI DNI TYGODNIA */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', fontWeight: '600', fontSize: '0.875rem', textAlign: 'center', color: '#94a3b8', paddingBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         <div>Pn</div><div>Wt</div><div>Śr</div><div>Cz</div><div>Pt</div><div>Sb</div><div>Nd</div>
       </div>
 
-      {/* GŁÓWNA SIATKA KALENDARZA */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px' }}>
         {calendarCells.map((cell) => {
-          // 1. FILTROWANIE LEKCJI DLA DANEGO DNIA
           const dayLessons = cell.fullDate && Array.isArray(lessons)
             ? lessons.filter(lesson => {
                 if (!lesson.data) return false;
@@ -145,12 +142,10 @@ export const Calendary = () => {
                 transition: 'border-color 0.2s'
               }}
             >
-              {/* Numer dnia */}
               <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#64748b', textAlign: 'right', marginBottom: '4px' }}>
                 {cell.dayNumber}
               </div>
               
-              {/* LISTA LEKCJI W DANYM DNIU */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', overflowY: 'auto' }}>
                 {dayLessons.map((lesson) => {
                   let hour = "";
@@ -166,14 +161,13 @@ export const Calendary = () => {
                   }
 
                   return (
-                    // ⚡ ZMIANA: Cały boks stał się klikalny, czysty i nowoczesny
                     <div 
                       key={lesson.id} 
                       onClick={() => navigate(`/${role}/lessonInformation/${lesson.id}`)}
                       style={{ 
-                        backgroundColor: 'rgba(2, 132, 199, 0.15)', // przezroczysty sky-600
+                        backgroundColor: 'rgba(2, 132, 199, 0.15)', 
                         border: '1px solid #0284c7',
-                        color: '#38bdf8', // sky-400
+                        color: '#38bdf8', 
                         fontSize: '11px', 
                         fontWeight: '600',
                         padding: '4px 6px', 

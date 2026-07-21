@@ -13,7 +13,6 @@ export const FormAddFile=({onAddFile}) => {
     return(
         <div className="min-h-[70vh] w-full flex flex-col justify-center items-center font-sans antialiased text-slate-200 p-4">
       
-      {/* Karta formularza w stylu Dark Mode Premium */}
       <div className="bg-slate-900 shadow-2xl border border-slate-800 px-6 sm:px-10 py-8 w-full max-w-md rounded-2xl transition-all">
         
         <div className="text-center w-full mb-2">
@@ -29,7 +28,6 @@ export const FormAddFile=({onAddFile}) => {
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           
-          {/* Pole 1: Własna nazwa pliku */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Nazwa pliku
@@ -45,7 +43,6 @@ export const FormAddFile=({onAddFile}) => {
             />
           </div>
 
-          {/* Pole 2: Wybór pliku z dysku (Ostylowany natywny input) */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Wybierz plik z dysku
@@ -54,7 +51,6 @@ export const FormAddFile=({onAddFile}) => {
               onChange={(e) => {
                 const selectedFile = e.target.files[0];
                 setFile(selectedFile);
-                // Opcjonalnie: jeśli pole nazwy jest puste, automatycznie podpowiada oryginalną nazwę pliku
                 if (!filename && selectedFile) {
                   setFilename(selectedFile.name);
                 }
@@ -73,7 +69,6 @@ export const FormAddFile=({onAddFile}) => {
             />
           </div>
 
-          {/* Przycisk wysyłania */}
           <div className="w-full pt-3">
             <button
               type="submit"

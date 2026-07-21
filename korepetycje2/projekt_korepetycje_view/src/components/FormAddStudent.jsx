@@ -41,7 +41,6 @@ export const FormAddStudent=({onRegisterStudent}) => {
 
         >
           
-          {/* Sekcja 1: Dane podstawowe (Imię i Nazwisko) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Imię</label>
@@ -70,7 +69,6 @@ export const FormAddStudent=({onRegisterStudent}) => {
             </div>
           </div>
 
-          {/* Sekcja 2: Szkoła i Login */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Klasa / Grupa</label>
@@ -99,7 +97,6 @@ export const FormAddStudent=({onRegisterStudent}) => {
             </div>
           </div>
 
-          {/* Sekcja 3: Kontakt i Bezpieczeństwo */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Adres E-mail</label>
@@ -128,7 +125,6 @@ export const FormAddStudent=({onRegisterStudent}) => {
             </div>
           </div>
 
-          {/* Sekcja 4: Adres zamieszkania (Szerokość 100%) */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Adres zamieszkania</label>
             <input
@@ -142,7 +138,6 @@ export const FormAddStudent=({onRegisterStudent}) => {
             />
           </div>
 
-          {/* Przycisk Akcji */}
           <div className="w-full pt-4">
             <button
               type="submit"

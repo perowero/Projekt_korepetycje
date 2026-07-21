@@ -10,16 +10,12 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
     return (
         <div className="min-h-[85vh] w-full flex flex-col justify-center items-center font-sans antialiased text-slate-200 p-4">
       
-      {/* Karta formularza - max-w-xl daje idealną szerokość na dwa pola obok siebie */}
       <div className="bg-slate-900 shadow-2xl border border-slate-800 px-6 sm:px-10 py-8 w-full max-w-xl rounded-2xl transition-all">
         
         <div className="text-center w-full mb-2">
           <h2 className="font-bold text-2xl text-white tracking-tight">
             REJESTRACJA NAUCZYCIELA
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Utwórz nowe konto prowadzącego w systemie
-          </p>
         </div>
         
         <div className="w-full bg-slate-850 my-5 h-[1px]"></div>
@@ -36,7 +32,6 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
 
         >
           
-          {/* Sekcja: Imię i Nazwisko obok siebie */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Imię</label>
@@ -65,7 +60,6 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
             </div>
           </div>
 
-          {/* Pole: Nazwa użytkownika */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Nazwa użytkownika (Login)</label>
             <input
@@ -79,13 +73,12 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
             />
           </div>
 
-          {/* Pole: Email */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Adres E-mail</label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="email" // Zmieniono na email dla natywnej walidacji @
+              type="email" 
               name="email"
               placeholder="jan.kowalski@szkola.pl"
               className="py-2.5 px-4 bg-slate-950 border border-slate-800 rounded-xl w-full text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
@@ -93,13 +86,12 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
             />
           </div>
 
-          {/* Pole: Hasło */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Hasło konta</label>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type="password" // Zmieniono na password, by ukrywać znaki
+              type="password" 
               name="password"
               placeholder="••••••••"
               className="py-2.5 px-4 bg-slate-950 border border-slate-800 rounded-xl w-full text-white placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
@@ -107,7 +99,6 @@ export const FormAddTeacher=({onRegisterTeacher})=>{
             />
           </div>
 
-          {/* Przycisk Rejestracji */}
           <div className="w-full pt-2">
             <button
               type="submit"

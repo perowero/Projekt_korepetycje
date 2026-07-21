@@ -42,7 +42,7 @@ export const FormLessonSummary=()=>{
         })
           .then((response) => {
             if (!response.ok) {
-              console.log("blad polaczenia wyswietlanie studentow");
+              console.log("bledna odpowiedz przy wysylaniu listy podsumowan");
             }
             return response.json();
           })
@@ -80,7 +80,6 @@ export const FormLessonSummary=()=>{
 
         >
           
-          {/* temat */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Temat</label>
@@ -95,7 +94,6 @@ export const FormLessonSummary=()=>{
               />
             </div>
 
-            {/*description*/}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Opis</label>
               <input
@@ -110,7 +108,6 @@ export const FormLessonSummary=()=>{
             </div>
           </div>
 
-          {/* ishomework */}
           <div className="flex items-center gap-3 py-2">
             <input 
               type="checkbox" 
@@ -124,7 +121,6 @@ export const FormLessonSummary=()=>{
             </label>
           </div>
 
-          {/* Pole: homework */}
           {ishomework&&
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-slate-400 uppercase tracking-wider">Praca domowa</label>

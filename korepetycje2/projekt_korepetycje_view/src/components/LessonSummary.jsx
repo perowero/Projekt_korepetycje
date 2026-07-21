@@ -61,7 +61,6 @@ export const LessonSummary = () => {
         
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-sky-500"></div>
 
-        {/* Nagłówek */}
         <div className="mb-4">
           <h2 className="font-bold text-2xl text-white tracking-tight uppercase">
             PODSUMOWANIE LEKCJI
@@ -70,10 +69,8 @@ export const LessonSummary = () => {
 
         <div className="w-full bg-slate-800 h-[1px] my-5"></div>
 
-        {/* Zawartość Podsumowania */}
         <div className="space-y-4 text-sm text-left">
           
-          {/* Temat */}
           <div className="p-3.5 bg-slate-950/60 border border-slate-800 rounded-xl space-y-1">
             <span className="text-slate-400 text-xs font-medium uppercase tracking-wider block">
               Temat lekcji
@@ -83,7 +80,6 @@ export const LessonSummary = () => {
             </span>
           </div>
 
-          {/* Opis */}
           <div className="p-3.5 bg-slate-950/60 border border-slate-800 rounded-xl space-y-1">
             <span className="text-slate-400 text-xs font-medium uppercase tracking-wider block">
               Opis zajęć
