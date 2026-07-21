@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AdminRegistration implements CommandLineRunner {
 
     private final AdminRegistrationRepository registrationRepository;
-    private final PasswordEncoder passwordEncoder; // Do bezpiecznego haszowania haseł
+    private final PasswordEncoder passwordEncoder;
 
     public AdminRegistration(AdminRegistrationRepository registrationRepository, PasswordEncoder passwordEncoder) {
         this.registrationRepository = registrationRepository;

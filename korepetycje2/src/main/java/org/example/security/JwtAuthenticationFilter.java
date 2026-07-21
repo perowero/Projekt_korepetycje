@@ -21,7 +21,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private CustomUserDetailsService userDetailsService; // Twój serwis ładujący użytkowników z bazy
+    private CustomUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         if (requestURI.startsWith("/api/auth/") || requestURI.startsWith("/api/register/")) {
             filterChain.doFilter(request, response);
-            return; // Kończymy działanie filtra dla tego zapytania
+            return;
         }
         try {
             String jwt = parseJwt(request);

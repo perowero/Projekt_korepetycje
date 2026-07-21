@@ -11,13 +11,10 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-    // Generujemy bezpieczny klucz kryptograficzny dla algorytmu HS256
     private final Key jwtSecret = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    // Token będzie ważny przez 24 godziny (w milisekundach)
     private final int jwtExpirationMs = 86400000;
 
-    // 1. Tworzenie tokenu po udanym logowaniu
     public String generateToken(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
@@ -29,7 +26,6 @@ public class JwtProvider {
                 .compact();
     }
 
-    // 2. Wyciąganie loginu użytkownika ze środka tokenu
     public String getUsernameFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(jwtSecret)
@@ -39,7 +35,6 @@ public class JwtProvider {
                 .getSubject();
     }
 
-    // 3. Sprawdzanie czy token jest poprawny i nie wygasł
     public boolean validateToken(String authToken) {
         try {
             Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(authToken);

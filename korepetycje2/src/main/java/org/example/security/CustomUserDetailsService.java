@@ -29,14 +29,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 1. Najpierw szukamy w tabeli studentów
         Optional<Admin> admin = adminRepository.findByUsername(username);
         if (admin.isPresent()) {
             Admin a = admin.get();
             return User.builder()
                     .username(a.getUsername())
                     .password(a.getPassword())
-                    .roles("ADMIN") // Zwróci rolę ROLE_ADMIN do Spring Security
+                    .roles("ADMIN")
                     .build();
         }
 
@@ -46,22 +45,19 @@ public class CustomUserDetailsService implements UserDetailsService {
             return User.builder()
                     .username(s.getUsername())
                     .password(s.getHash_password())
-                    .roles("STUDENT") // Nadajemy rolę Spring Security
+                    .roles("STUDENT")
                     .build();
         }
 
-        // 2. Jeśli nie ma studenta, szukamy w nauczycielach
         Optional<TeacherRegistration> teacher = teacherRepository.findByUsername(username);
         if (teacher.isPresent()) {
             TeacherRegistration t = teacher.get();
             return User.builder()
                     .username(t.getUsername())
                     .password(t.getHash_password())
-                    .roles("TEACHER") // Nadajemy rolę Spring Security
+                    .roles("TEACHER")
                     .build();
         }
-
-        // 3. Jeśli nigdzie nie ma - rzucamy wyjątek
         throw new UsernameNotFoundException("Nie znaleziono użytkownika o loginie: " + username);
     }
 }

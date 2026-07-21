@@ -34,7 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Zabezpieczenie haseł przez BCrypt
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -45,7 +45,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Włączamy CORS przy użyciu naszego nowego Beana corsFilter()
                 .cors(Customizer.withDefaults())
 
                 .csrf(csrf -> csrf
@@ -67,11 +66,9 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Pomocnicza metoda definiująca zasady CORS wewnątrz SecurityConfig
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Zezwalamy na komunikację z Twoim Reactem
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept"));
@@ -79,7 +76,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Stosuj do wszystkich ścieżek
+        source.registerCorsConfiguration("/**", configuration);
 
         return new CorsFilter(source);
     }
@@ -88,8 +85,8 @@ public class SecurityConfig {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(userDetailsService); // Mapujemy Twój serwis bazodanowy
-        authProvider.setPasswordEncoder(passwordEncoder());   // KLUCZOWE: Wskazujemy BCrypt do haseł!
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
     }
