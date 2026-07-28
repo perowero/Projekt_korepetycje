@@ -41,7 +41,6 @@ const StudentLayout = () => {
   );
 };
 
-// 2. Strażnika zapinamy bezpośrednio w routerze, owijając nim całe Layouty!
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
 
